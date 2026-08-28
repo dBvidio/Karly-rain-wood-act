@@ -36,7 +36,6 @@ declare global {
 export function track(step: FunnelStep, props?: Record<string, string>) {
   if (typeof window === "undefined") return;
 
-  // eslint-disable-next-line no-console
   console.info("[funnel]", step, props || {});
 
   if (window.plausible) {

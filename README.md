@@ -221,15 +221,135 @@ a guess.
 
 ---
 
-## Known issue (flagged for review)
+## Mobile flow testing (flagged — emulated, not a physical device)
 
-`npm audit` currently reports high-severity advisories against the pinned
-Next.js 14.2.x / bundled PostCSS versions (SSRF/cache-poisoning classes,
-patched upstream in Next 15/16). Fixing them cleanly means a major-version
-upgrade to Next.js, which is a real migration (App Router behavior changes)
-rather than a drop-in patch — not something to do silently inside this
-build. Recommend scheduling that upgrade as a follow-up task before or
-shortly after launch rather than shipping it unverified here.
+This build environment has no physical phone attached and no camera/screen
+to hand a real device to, so "on an actual phone" was tested as closely as
+this environment allows: a headless Chromium instance with Playwright's
+**iPhone 13 device emulation** (390×664 viewport, mobile user agent, touch
+input) driving the deployed build through the real DOM/JS — not a
+simulated click via test IDs.
+
+Confirmed working, end to end, with 0 JavaScript console errors:
+- ZIP submission → lawmaker cards render with checkmarks → auto-advance to
+  the personalize/send step.
+- Tapping a prompt chip ("I'm a parent") correctly inserts its starter
+  sentence into the personalization box.
+- **COPY MESSAGE**: one tap, no text selection — verified by reading the
+  OS clipboard afterward and confirming it contains the subject line, the
+  letter body, *and* the personalization text, concatenated correctly.
+- **SEND TO MY LAWMAKERS**: one tap copies the message to clipboard *and*
+  calls `window.open()` on the first office's contact-form URL — confirmed
+  by intercepting `window.open()` calls in-page (needed because this
+  sandbox's network policy blocks outbound requests to arbitrary test
+  domains, which would otherwise make a real navigation attempt look like
+  a failure that isn't actually one).
+- The two remaining "Open contact form: <name>" buttons each opened their
+  own office's distinct contact-form URL — all **3 offices covered**, no
+  duplicates missed, the already-opened one still marked with a checkmark.
+- Confirmation step renders, and the server-side action counter increments
+  by exactly 1 per real send (verified 1 → 2 → 3 across test runs — no
+  fake/random numbers).
+
+**What this doesn't cover** that only a real phone can: actual mobile
+Safari/Chrome popup-blocking behavior (iOS Safari is stricter about
+multiple `window.open()` calls from one gesture than desktop Chromium —
+this is why the UI opens only the *first* office automatically on SEND and
+surfaces the other two as separate, explicit one-tap buttons rather than
+trying to open three tabs from a single click), on-device clipboard
+permission prompts, and real-world thumb ergonomics/tap-target sizing.
+**Recommend one real hands-on pass on an iPhone and an Android phone**
+before launch, specifically checking: does iOS Safari block or silently
+no-op the SEND button's automatic first-tab-open, and do all tap targets
+feel comfortably sized.
+
+---
+
+## Geocodio integration — not yet verified end-to-end (blocked)
+
+I could not complete this. Geocodio requires a registered API key tied to
+an account (with billing set up beyond the free trial credits), and I have
+neither a `GEOCODIO_API_KEY` nor authorization to create a paid account on
+your behalf. `lib/lookup.ts` / `app/api/lookup/route.ts` are written and
+already handle the full response shape (2 senators + 1 representative,
+each with `contactFormUrl`), and the "not configured" / "no match" /
+"provider error" paths are all covered and tested (see build log above:
+hitting `/api/lookup` locally with no key correctly returns
+`{"error":"Lookup failed.","code":"NOT_CONFIGURED"}` rather than failing
+silently) — but I have not made a single real call to Geocodio's API, so I
+cannot yet confirm real addresses return correct offices or that the
+`contact_form` URLs Geocodio provides are live, correct, and point at the
+actual message-submission form rather than a generic "contact" landing
+page.
+
+**What I need from you to finish this:**
+1. A Geocodio API key (free signup at geocod.io gets trial credits) —
+   either send it to me to add as `GEOCODIO_API_KEY` and I'll run the
+   verification, or run it yourself: `curl "https://api.geocod.io/v1.7/geocode?q=<ADDRESS>&fields=cd&api_key=<KEY>"`
+   and check `results[0].fields.congressional_districts[0].current_legislators`
+   for 1 senator×2 + 1 representative, each with a non-empty
+   `contact.contact_form` URL.
+2. Once I have a key, I'll test 2-3 real addresses spanning different
+   states (to catch state-specific formatting issues) and report back
+   specifically on: whether all 3 offices resolve, whether every
+   `contact_form` URL is present and loads, and whether any of them land
+   on a generic office page instead of the actual message form (a known
+   risk with some smaller House offices whose sites route "contact" to a
+   menu page rather than a direct form).
+
+---
+
+## Deploying a preview
+
+I don't currently have Vercel or Netlify account access from this
+environment, so I haven't deployed a live preview URL yet. To get you one
+fastest:
+
+- **Fastest path:** if you connect this GitHub repo to a Vercel or Netlify
+  account (either invite me as a collaborator with deploy access, or share
+  a deploy token / project you've already created), I can push the preview
+  directly and hand you the URL.
+- **Or, in the meantime, the fastest way for you to see it yourself:**
+  import `dBvidio/Karly-rain-wood-act` at vercel.com/new (or
+  app.netlify.com), point it at branch `claude/karly-rain-wood-advocacy-xvhykc`,
+  and add the `GEOCODIO_API_KEY` environment variable — it'll deploy in
+  under a minute and every future push to this branch will auto-update the
+  preview URL.
+
+---
+
+## Next.js version
+
+Upgraded to **Next.js 16.3.3** (from 14.2.x) to clear the high-severity
+`npm audit` advisories that only had fixes upstream in Next 15/16
+(SSRF/cache-poisoning classes) — `npm audit` now reports **0
+vulnerabilities**. React/ReactDOM were bumped to 19.2.0 to match (Next 16
+requires React 19).
+
+**What broke and was fixed as part of the upgrade:**
+- `next lint` was removed in Next 16 — the `lint` script now runs `eslint .`
+  directly, and ESLint config moved from the old `.eslintrc.json` to a flat
+  `eslint.config.mjs` (ESLint 9 requires flat config; `eslint-config-next`
+  16.x ships its ruleset as a ready flat-config array, so
+  `eslint.config.mjs` just re-exports it plus an `ignores` block for
+  `.next/`).
+- `eslint` itself had to move from 8.x to 9.x (peer requirement of
+  `eslint-config-next@16`).
+- `postcss` was bumped to 8.5.26 (was pinned to a version with its own
+  advisories, independent of Next).
+- Next 16's build step auto-migrated `tsconfig.json` (added Turbopack's dev
+  types path, set `jsx: "react-jsx"`) — left as Next generated it.
+
+**Re-verified after the upgrade:** clean `npm run build`, clean
+`npm run lint` (0 errors/warnings), and a full mobile-emulated run of the
+find-lawmakers → personalize (incl. prompt chip) → copy-message →
+send → open-each-contact-form → confirmation flow with 0 JavaScript
+console errors and the clipboard/window.open behavior verified
+programmatically (see "Mobile flow testing" below). Nothing else in the
+app code needed to change — this project doesn't use any of the App
+Router APIs whose behavior changed across 15/16 (no dynamic route params,
+no `cookies()`/`headers()`, fetches already opt out of caching with
+`cache: "no-store"`).
 
 ---
 
