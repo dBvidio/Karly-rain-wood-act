@@ -1,0 +1,176 @@
+{
+  "_readme": "This file is the site's content. Edit the text values (never the keys) to update copy without touching code. Anything wrapped in [Amber: ...] is a placeholder that needs real content before launch — search this file for '[Amber:' to find every one.",
+
+  "campaign": {
+    "hashtag": "#Pass5245",
+    "billNumber": "S. 5245",
+    "billName": "Karly Rain Wood Act",
+    "communityName": "Karly's Angels Army",
+    "domain": "KarlyRainWoodAct.com",
+    "sisterSites": {
+      "karlyRain": "https://karlyrain.com",
+      "karlyRainMatters": "https://karlyrainmatters.com"
+    },
+    "pressEmail": "[Amber: insert press/contact email]"
+  },
+
+  "hero": {
+    "headline": "TELL CONGRESS: SUPPORT THE KARLY RAIN WOOD ACT",
+    "subhead": "Help us pass S. 5245",
+    "ask": "Ask your members of Congress to support and help advance the Karly Rain Wood Act, S. 5245.",
+    "ctaLabel": "TAKE ACTION",
+    "reasons": [
+      "[Amber: one punchy sentence — reason #1 the bill matters]",
+      "[Amber: one punchy sentence — reason #2 the bill matters]",
+      "[Amber: one punchy sentence — reason #3 the bill matters]"
+    ]
+  },
+
+  "lookupStep": {
+    "eyebrow": "Step 1 of 3",
+    "title": "Find your lawmakers",
+    "helpText": "We'll look up your 2 U.S. Senators and 1 U.S. Representative — we never store your address.",
+    "inputLabel": "Your address or ZIP code",
+    "inputPlaceholder": "e.g. 12345 or 123 Main St, Springfield, IL",
+    "buttonLabel": "FIND MY LAWMAKERS",
+    "errorNoMatch": "We couldn't match that to a congressional district. Double-check your ZIP or try your full street address.",
+    "errorGeneric": "Something went wrong on our end looking that up.",
+    "manualFallbackLabel": "Look up your representatives directly on Congress.gov",
+    "manualFallbackUrl": "https://www.congress.gov/members/find-your-member"
+  },
+
+  "messageStep": {
+    "eyebrow": "Step 2 of 3",
+    "title": "Personalize and send your message",
+    "subjectLine": "Please Support the Karly Rain Wood Act – S. 5245",
+    "letterBody": "I'm writing as your constituent to ask you to support and help advance the Karly Rain Wood Act, S. 5245.\n\n[Amber: insert 2-3 sentence plain-language summary of what the bill does and why it matters]\n\nThis bill matters to our community, and I'm asking you to co-sponsor it and push for a vote. Please let me know where you stand.\n\nThank you for your time and your service.",
+    "personalizeBoxTitle": "ADD YOUR OWN WORDS",
+    "personalizeBoxSubtitle": "Optional but encouraged: tell them why this matters to you, your family, or your community.",
+    "personalizeNote": "Congressional offices count individual, personalized messages very differently from identical form letters — a sentence or two in your own words makes this count more.",
+    "promptChips": [
+      { "label": "I'm a parent", "starter": "As a parent, this issue is personal to me because " },
+      { "label": "I'm a survivor", "starter": "As a survivor, I'm asking you to support this bill because " },
+      { "label": "I work with victims", "starter": "In my work supporting victims, I've seen firsthand why this bill matters: " },
+      { "label": "Public safety matters to me", "starter": "Public safety in our community depends on changes like this because " },
+      { "label": "Karly's story moved me", "starter": "Karly's story moved me, and I'm asking you to act because " },
+      { "label": "Write my own", "starter": "" }
+    ],
+    "sendButtonLabel": "SEND TO MY LAWMAKERS",
+    "copyButtonLabel": "COPY MESSAGE",
+    "copiedLabel": "Copied!",
+    "openFormLabel": "Open contact form",
+    "sendHelpText": "Most congressional offices require their own secure contact form. We'll copy your finished message and open each office's official page so you can paste it in — usually just a few taps."
+  },
+
+  "confirmation": {
+    "headline": "You just became part of Karly's Angels Army.",
+    "subhead": "You did it. Now multiply your voice.",
+    "shareText": "I just asked Congress to support the Karly Rain Wood Act, S. 5245. Will you join me? #Pass5245",
+    "textShareLabel": "TEXT THIS TO 3 PEOPLE",
+    "facebookShareLabel": "SHARE ON FACEBOOK",
+    "copyLinkLabel": "COPY KARLYRAINWOODACT.COM/TAKEACTION",
+    "counterPrefix": "",
+    "counterSuffix": "people have contacted Congress so far",
+    "counterFallback": "Be part of a growing movement of people contacting Congress."
+  },
+
+  "why": {
+    "eyebrow": "Why this matters",
+    "title": "Karly's story",
+    "body": [
+      "[Amber: tell Karly's story here, with care and dignity. 2-4 short paragraphs. Center the change this bill creates, not the details of tragedy.]"
+    ],
+    "pullQuote": "[Amber: optional short pull-quote from Karly's family, if you want one here]"
+  },
+
+  "billSummary": {
+    "eyebrow": "The bill",
+    "title": "What the Karly Rain Wood Act actually does",
+    "points": [
+      "[Amber: plain-language bullet #1 — what S. 5245 changes]",
+      "[Amber: plain-language bullet #2 — what S. 5245 changes]",
+      "[Amber: plain-language bullet #3 — what S. 5245 changes]"
+    ],
+    "fullTextLabel": "Read the full bill text on Congress.gov",
+    "fullTextUrl": "https://www.congress.gov/bill/119th-congress/senate-bill/5245"
+  },
+
+  "billStatus": {
+    "eyebrow": "Where it stands",
+    "title": "Bill status",
+    "lastUpdated": "[Amber: update this date each time you edit this section, e.g. 2026-08-28]",
+    "stage": "[Amber: e.g. Introduced / Referred to Committee / Passed Senate / Passed House / Signed into law]",
+    "statusNote": "[Amber: 1-2 sentence plain-language update on where the bill stands and what happens next]"
+  },
+
+  "endorsements": {
+    "eyebrow": "Who's behind this",
+    "title": "Endorsements",
+    "intro": "[Amber: replace with real endorsing organizations and public figures once confirmed. Do not publish placeholder logos/quotes as if real.]",
+    "items": [
+      {
+        "name": "[Amber: organization or individual name]",
+        "quote": "[Amber: real quote only — do not fabricate]",
+        "logoUrl": "",
+        "url": ""
+      }
+    ],
+    "becomeEndorserLabel": "Want your organization listed here?",
+    "becomeEndorserEmail": "[Amber: insert endorsement contact email]"
+  },
+
+  "donate": {
+    "eyebrow": "Support the cause",
+    "title": "Chip in to help pass the Karly Rain Wood Act",
+    "body": "[Amber: this section is intentionally separate from the 'contact Congress' ask above so it doesn't compete with it. Insert real fundraising copy and link once a donation processor is set up (e.g. ActBlue, Donorbox, GiveButter).]",
+    "buttonLabel": "DONATE",
+    "donateUrl": ""
+  },
+
+  "press": {
+    "eyebrow": "In the news",
+    "title": "Press & media",
+    "items": [
+      {
+        "outlet": "[Amber: outlet name]",
+        "headline": "[Amber: headline]",
+        "url": "",
+        "date": ""
+      }
+    ],
+    "mediaContactLabel": "Press inquiries",
+    "mediaContactEmail": "[Amber: insert press email — can match campaign.pressEmail]"
+  },
+
+  "faq": {
+    "eyebrow": "Questions",
+    "title": "FAQ",
+    "items": [
+      {
+        "question": "What is the Karly Rain Wood Act?",
+        "answer": "[Amber: short plain-language answer]"
+      },
+      {
+        "question": "Why does my message need to be personalized?",
+        "answer": "Congressional staff read every message that comes in, but they weigh personal, original messages more heavily than identical form letters when gauging genuine constituent concern. A sentence or two in your own words goes a long way."
+      },
+      {
+        "question": "Is my information stored or sold?",
+        "answer": "[Amber: confirm and insert real privacy answer — this site does not store your address; confirm what, if anything, is retained from the message form.]"
+      },
+      {
+        "question": "I don't live in a state with a sponsor — should I still take action?",
+        "answer": "Yes. Every constituent message to every office, sponsor or not, helps build momentum and signals nationwide support."
+      }
+    ]
+  },
+
+  "footer": {
+    "tagline": "A campaign to pass the Karly Rain Wood Act, S. 5245.",
+    "socialLinks": [
+      { "label": "Facebook", "url": "[Amber: insert URL]" },
+      { "label": "Instagram", "url": "[Amber: insert URL]" }
+    ],
+    "contactEmail": "[Amber: insert general contact email]"
+  }
+}
