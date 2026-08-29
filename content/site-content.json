@@ -110,7 +110,8 @@
   "endorsements": {
     "eyebrow": "Who's behind this",
     "title": "Endorsements",
-    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Representative Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself. [Amber: replace the placeholder item below with real endorsing organizations/quotes once confirmed — do not publish it as if it were a real endorsement.]",
+    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Representative Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself.",
+    "_note": "The 'intro' text above IS shown to visitors, so keep it real-content-only. The placeholder item below is intentionally NOT shown to visitors (the site hides any endorsement whose name/quote still contains '[Amber:') — replace it with a real endorsement, or add more items, whenever you have one confirmed. Do not fabricate a quote to fill the gap.",
     "items": [
       {
         "name": "[Amber: organization or individual name]",

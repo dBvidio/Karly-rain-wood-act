@@ -4,7 +4,7 @@ import { track } from "@/lib/analytics";
 
 export default function StickyCta({ label }: { label: string }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-rain-200 bg-cream/95 p-3 backdrop-blur sm:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-ink-900/95 p-3 backdrop-blur sm:hidden">
       <a
         href="#action"
         onClick={() => track("take_action_click", { source: "sticky_bar" })}

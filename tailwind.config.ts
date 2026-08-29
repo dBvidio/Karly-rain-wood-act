@@ -1,11 +1,26 @@
 import type { Config } from "tailwindcss";
 
-// NOTE (flagged for Amber): exact hex values below are a warm, "Rain"-themed
-// placeholder palette. We could not browse KarlyRain.com from this build
-// environment (network egress to it was blocked), so these are our best
-// compassionate-but-urgent guess, NOT pulled from the live site. Before
-// launch, check these against KarlyRain.com / KarlyRainMatters.com and
-// swap values here — every color in the site pulls from this one place.
+// PALETTE STATUS (flagged for Amber — read before changing):
+//
+// Previously this file held a placeholder rose/cream guess because the
+// build environment couldn't reach KarlyRain.com at all. It has now been
+// updated to a hot-pink / black / white palette per your direct
+// description: "bright pink/magenta with black nav and white background
+// ... header banner hot pink (~#E6007E-#EC1E79 range) ... nav bar black
+// ... body white ... headline text black."
+//
+// IMPORTANT CAVEAT: this build environment still cannot reach
+// karlyrain.com, karlyrainwoodact.com, or sites.google.com (organization
+// network policy blocks all three — confirmed via curl, WebFetch, and the
+// proxy's own status log, not a transient failure). That means the exact
+// hex below (#e6007e) was NOT sampled by me from a real screenshot or
+// pixel-picked from the live site — it's the first value in the range you
+// gave me. Please pixel-sample the real header banner yourself (e.g.
+// browser DevTools color picker, or drop a screenshot here) and correct
+// `rain[500]` below if it's off; the rest of the ramp (50-900) was
+// generated programmatically as tints/shades of that one value, so fixing
+// `500` and regenerating the ramp is the only edit needed if the exact hex
+// changes.
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,36 +30,38 @@ const config: Config = {
     extend: {
       colors: {
         rain: {
-          50: "#fdf5f4",
-          100: "#fbe9e7",
-          200: "#f5cdc8",
-          300: "#eba9a1",
-          400: "#dd7a6f",
-          500: "#c8483a", // primary action red/rose — "Rain" red
-          600: "#ac332a",
-          700: "#8c2823",
-          800: "#722320",
-          900: "#5f201f",
+          50: "#ffebf6",
+          100: "#ffd6ed",
+          200: "#ffa8d8",
+          300: "#ff66ba",
+          400: "#ff1a97",
+          500: "#e6007e", // primary hot pink/magenta — unverified exact value, see caveat above
+          600: "#b30062",
+          700: "#800046",
+          800: "#570030",
+          900: "#39001f",
         },
+        // Soft pink tints for secondary surfaces (chips, gradients) — same
+        // hue family as `rain`, just lighter, so they read as one palette.
         blush: {
-          50: "#fff8f6",
-          100: "#fdece7",
-          200: "#fad6cb",
+          50: "#ffebf6",
+          100: "#ffd6ed",
+          200: "#ffa8d8",
         },
         ink: {
-          900: "#2b2320",
-          700: "#4a3f3b",
-          500: "#766a65",
+          900: "#0d0d0d", // near-black, for headline text / "black nav" contrast
+          700: "#2b2b2b",
+          500: "#5c5c5c",
         },
-        cream: "#fbf6ef",
-        gold: "#e8b34c",
+        cream: "#ffffff", // legacy token name; value is now real white per "body white"
+        gold: "#e8b34c", // unverified secondary accent — no secondary accent color was given; keep, adjust, or drop once confirmed
       },
       fontFamily: {
         display: ["'Fraunces'", "Georgia", "serif"],
         body: ["'Inter'", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        soft: "0 10px 30px -12px rgba(43, 35, 32, 0.25)",
+        soft: "0 10px 30px -12px rgba(13, 13, 13, 0.25)",
       },
       borderRadius: {
         xl2: "1.25rem",

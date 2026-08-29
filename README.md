@@ -190,20 +190,34 @@ another provider by editing that one file if preferred.
 
 ## Visual design — palette & type (flagged for review)
 
-The brief asked the palette and type to match KarlyRain.com. **This build
-environment's network access to karlyrain.com was blocked**, so the exact
-hex values in `tailwind.config.ts` (under the `rain` / `blush` / `ink` /
-`cream` / `gold` keys) are a considered placeholder — warm cream
-background, a strong rose-red "rain" accent for the primary action color,
-soft blush for secondary surfaces — not colors pulled from the live site.
+Updated from the placeholder rose/cream guess to a hot-pink / black / white
+palette, per your direct description of KarlyRain.com (this environment
+still cannot reach karlyrain.com, sites.google.com, or
+karlyrainwoodact.com — confirmed via curl, WebFetch, and the network
+proxy's own status log all agreeing it's an organization policy block, not
+a transient failure — so nothing here was independently pixel-verified by
+me):
 
-**Before launch:** open KarlyRain.com, pick out its real hex values (colors
-+ exact font names), and update `tailwind.config.ts` — every component
-pulls its colors from that one file, so it's a single edit to bring the
-whole site in line. Typography is currently `Fraunces` (display/serif,
-Google Fonts) + `Inter` (body, Google Fonts) as a warm-but-modern pairing;
-swap the font imports in `app/layout.tsx` if KarlyRain.com uses something
-specific.
+| Token | Value | Source |
+|---|---|---|
+| `rain[500]` (primary CTA/accent) | `#e6007e` | First value in the `#E6007E`-`#EC1E79` range you gave — **please pixel-sample the real header banner yourself and correct this if it's off**; the rest of the `rain` ramp (50-900) is generated tints/shades of this one value |
+| `ink[900]` (headline text, footer/sticky-bar background) | `#0d0d0d` | Near-black, per "headline text black" / "nav bar black" |
+| `cream` (body background; legacy token name, kept to avoid touching every component) | `#ffffff` | Per "body white" |
+| `gold` (secondary accent, used on 2 card borders) | `#e8b34c` unchanged | No secondary accent color was given — flagged as still unverified; drop or replace once you confirm whether the real site has one |
+
+There's no top nav bar in this single-page design, so "black nav" was
+applied to its closest equivalents: the mobile sticky action bar and the
+footer are now `ink-900` (near-black) with white text, rather than
+literally adding a nav element that doesn't otherwise fit the layout.
+
+Typography is unchanged — `Fraunces` (display/serif) + `Inter` (body),
+both Google Fonts — since no font names were given this round; swap the
+imports in `app/layout.tsx` if KarlyRain.com uses something specific.
+
+Verified by screenshot (local build; see chat for before/after images):
+CTA button renders `rgb(230, 0, 126)` = `#e6007e`, body background
+`rgb(255, 255, 255)` = white, H1 text `rgb(13, 13, 13)` = `#0d0d0d`, footer
+background `rgb(13, 13, 13)`.
 
 ---
 
@@ -230,16 +244,28 @@ KarlyRain.com / KarlyRainMatters.com. Search `content/site-content.json`
 for `[Amber:` to find what's still an explicit placeholder — currently just:
 
 - **Endorsements** (`endorsements.items`) — one placeholder entry ships so
-  the layout isn't empty. Real endorser quotes/logos still needed; sponsors
-  Ricketts and Fischer are already listed correctly in `billStatus` and in
-  the endorsements section intro as "sponsored by," not as fabricated
-  endorsement quotes.
+  Amber has a template to fill in. Real endorser quotes/logos still needed;
+  sponsors Ricketts and Fischer are already listed correctly in
+  `billStatus` and in the endorsements section intro as "sponsored by," not
+  as fabricated endorsement quotes.
 - **2 FAQ answers** (`faq.items`) — "What is the Karly Rain Wood Act?" and
   "Is my information stored or sold?" — left untouched per your instruction
   since there's no source material for those yet.
+
+  **Note on both of these:** `components/Endorsements.tsx` and
+  `components/Faq.tsx` now use a shared `isPlaceholder()` check
+  (`lib/placeholder.ts`) to skip rendering any item whose text still
+  contains `[Amber:` — so visitors never see a bracketed editorial note as
+  if it were real copy (confirmed by reading the rendered page's actual
+  text content, not just the JSON). The JSON placeholder stays in place so
+  Amber still sees exactly what to fill in; if only placeholder items exist
+  in a section (as is currently true for endorsements), that section quietly
+  shows nothing instead of an empty-looking placeholder card. Once real
+  content replaces `[Amber: ...]` in the JSON, it'll start rendering
+  automatically — no code change needed.
 - `public/og-image.svg` — placeholder share image, needs a real design.
-- `tailwind.config.ts` — still the placeholder palette (holding per your
-  instruction until you send real KarlyRain.com hex values).
+- `tailwind.config.ts` — palette updated to pink/black/white this round;
+  see "Visual design" above for exact values and what's still unverified.
 - `GEOCODIO_API_KEY` — required for the lookup to function; see "Diagnosing
   a find-lawmakers failure" below.
 - Counter store — swap to Vercel KV/Upstash before launch (see above).
