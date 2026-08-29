@@ -83,6 +83,34 @@ that one file.
 the page never silently fails — it shows a clear error message and a link
 to Congress.gov's own official lookup tool, per the brief's requirement.
 
+### Diagnosing a "find my lawmakers" failure
+
+If FIND MY LAWMAKERS fails, the API route (`app/api/lookup/route.ts`)
+always returns a `code` telling you exactly why — nothing fails silently.
+The three possible codes, and now the message each shows the visitor:
+
+| `code` | What it means | Message shown |
+|---|---|---|
+| `NOT_CONFIGURED` | **`GEOCODIO_API_KEY` isn't set** in the environment | "Lookup service not configured yet — our team needs to finish setting this up." |
+| `NO_MATCH` | Key is set, but Geocodio couldn't match the address/ZIP to a district | "We couldn't match that to a congressional district..." |
+| everything else | A real Geocodio API/network error | "Something went wrong on our end looking that up." |
+
+Previously `NOT_CONFIGURED` and a real provider error both showed the same
+generic message, which is almost certainly what the screenshot showed —
+that's fixed now (`lookupStep.errorNotConfigured` in
+`content/site-content.json`, wired up in `components/ActionFlow.tsx`), so
+a missing key is now unambiguous on-screen instead of looking like an
+unknown bug.
+
+I confirmed locally (no key set) that the route returns exactly
+`{"error":"Lookup failed.","code":"NOT_CONFIGURED"}`, and that this is the
+*only* explanation needed here — the route, request handling, and response
+shape all built and ran cleanly under Next 16 with no other errors. **The
+environment variable name the code expects is `GEOCODIO_API_KEY`** (see
+`.env.example` and `lib/lookup.ts`) — add it in Vercel under Project
+Settings → Environment Variables and redeploy, and the lookup should work
+immediately with no other changes needed.
+
 ---
 
 ## How "send to my lawmakers" works
@@ -196,28 +224,49 @@ specific.
 
 ## What's placeholder / still needs Amber
 
-Search `content/site-content.json` for `[Amber:` — every one of these is a
-spot where real content is required and none has been fabricated:
+Karly's story, the bill summary, bill status, sponsors, donate links, press,
+and social links were updated from real source content pulled from
+KarlyRain.com / KarlyRainMatters.com. Search `content/site-content.json`
+for `[Amber:` to find what's still an explicit placeholder — currently just:
 
-- Hero: the 3 "why this matters" reasons
-- Karly's story (`why.body`) and optional pull-quote
-- Plain-language bill summary bullets (`billSummary.points`)
-- Bill status (`billStatus.stage`, `.statusNote`, `.lastUpdated`)
-- Endorsements — real organizations/quotes only (one placeholder entry
-  ships so the layout isn't empty; delete it once real endorsers are added)
-- Press mentions
-- Donate section link (`donate.donateUrl`) — wire up ActBlue / Donorbox /
-  GiveButter once a processor is chosen
-- Press/contact/endorsement emails
-- Footer social links
-- `public/og-image.svg` — replace placeholder share image with a designed one
-- `tailwind.config.ts` — swap in real KarlyRain.com colors/fonts (see above)
-- `GEOCODIO_API_KEY` — required for the lookup to function at all
-- Counter store — swap to Vercel KV/Upstash before launch (see above)
+- **Endorsements** (`endorsements.items`) — one placeholder entry ships so
+  the layout isn't empty. Real endorser quotes/logos still needed; sponsors
+  Ricketts and Fischer are already listed correctly in `billStatus` and in
+  the endorsements section intro as "sponsored by," not as fabricated
+  endorsement quotes.
+- **2 FAQ answers** (`faq.items`) — "What is the Karly Rain Wood Act?" and
+  "Is my information stored or sold?" — left untouched per your instruction
+  since there's no source material for those yet.
+- `public/og-image.svg` — placeholder share image, needs a real design.
+- `tailwind.config.ts` — still the placeholder palette (holding per your
+  instruction until you send real KarlyRain.com hex values).
+- `GEOCODIO_API_KEY` — required for the lookup to function; see "Diagnosing
+  a find-lawmakers failure" below.
+- Counter store — swap to Vercel KV/Upstash before launch (see above).
 
-Nothing about Karly, the bill's text, statistics, or endorsers has been
-invented — every one of those spots is an explicit placeholder rather than
-a guess.
+**Flagged for your confirmation (pulled from an external site, not from you
+or Amber directly, so unverified):**
+- `donate.donateUrl` (GoFundMe) and `donate.venmoHandle` (`@karlyrain`) —
+  confirm both are still active/monitored before launch.
+- The 5 social links in `footer.socialLinks` were *constructed* from the
+  handles you gave (e.g. `@StandUpForKarlyRain` → `facebook.com/StandUpForKarlyRain`)
+  using each platform's standard URL pattern — they were not copied from a
+  working link I visited. Click through all 5 before launch, especially the
+  Facebook group: Facebook groups often use a numeric ID rather than a
+  vanity slug, so `facebook.com/groups/RememberKarlyRain` may 404 even
+  though the handle itself is right.
+- **Sponsor titles** (`billStatus.statusNote`): you specified Senator Pete
+  Ricketts (NE) as primary sponsor and *Representative* Deb Fischer (NE) as
+  co-sponsor. I used that verbatim since it's what you sourced — but
+  flagging it because Deb Fischer is publicly known as a sitting U.S.
+  *Senator* from Nebraska, not a Representative. Worth double-checking
+  against the bill's actual cosponsor listing on Congress.gov before this
+  goes live, since a wrong chamber/title on a specific, checkable fact is
+  the kind of error that undermines credibility fast.
+
+Nothing about Karly, the bill's text, or endorsers has been invented —
+everything above is either sourced from what you provided, or an explicit
+placeholder/flag rather than a guess.
 
 ---
 

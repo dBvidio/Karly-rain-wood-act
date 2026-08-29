@@ -11,7 +11,7 @@
       "karlyRain": "https://karlyrain.com",
       "karlyRainMatters": "https://karlyrainmatters.com"
     },
-    "pressEmail": "[Amber: insert press/contact email]"
+    "pressEmail": "StandForKarlyRain@gmail.com"
   },
 
   "hero": {
@@ -20,9 +20,9 @@
     "ask": "Ask your members of Congress to support and help advance the Karly Rain Wood Act, S. 5245.",
     "ctaLabel": "TAKE ACTION",
     "reasons": [
-      "[Amber: one punchy sentence — reason #1 the bill matters]",
-      "[Amber: one punchy sentence — reason #2 the bill matters]",
-      "[Amber: one punchy sentence — reason #3 the bill matters]"
+      "Karly Rain Wood was 20, building a future and a business of her own, when repeat violent offenders took her life — and her case is still unsolved.",
+      "This bill creates a national registry so law enforcement agencies actually talk to each other about repeat violent offenders, instead of losing track at the state line.",
+      "It gives communities real safety information about who's moving in next door — before another family gets the call Amber got."
     ]
   },
 
@@ -34,6 +34,7 @@
     "inputPlaceholder": "e.g. 12345 or 123 Main St, Springfield, IL",
     "buttonLabel": "FIND MY LAWMAKERS",
     "errorNoMatch": "We couldn't match that to a congressional district. Double-check your ZIP or try your full street address.",
+    "errorNotConfigured": "Lookup service not configured yet — our team needs to finish setting this up. In the meantime, use the link below.",
     "errorGeneric": "Something went wrong on our end looking that up.",
     "manualFallbackLabel": "Look up your representatives directly on Congress.gov",
     "manualFallbackUrl": "https://www.congress.gov/members/find-your-member"
@@ -43,7 +44,7 @@
     "eyebrow": "Step 2 of 3",
     "title": "Personalize and send your message",
     "subjectLine": "Please Support the Karly Rain Wood Act – S. 5245",
-    "letterBody": "I'm writing as your constituent to ask you to support and help advance the Karly Rain Wood Act, S. 5245.\n\n[Amber: insert 2-3 sentence plain-language summary of what the bill does and why it matters]\n\nThis bill matters to our community, and I'm asking you to co-sponsor it and push for a vote. Please let me know where you stand.\n\nThank you for your time and your service.",
+    "letterBody": "I'm writing as your constituent to ask you to support and help advance the Karly Rain Wood Act, S. 5245.\n\nThis bill creates the Karly Rain Wood Repeat Violent Felon Registration and Notification Program at the Department of Justice — a national system to register and track repeat violent offenders and notify the public, so law enforcement agencies actually communicate across state lines and communities have the safety information they deserve. It's named for Karly Rain Wood, a 20-year-old Nebraska woman killed by repeat violent offenders in November 2022 in a case that remains unsolved.\n\nThis bill matters to our community, and I'm asking you to co-sponsor it and push for a vote. Please let me know where you stand.\n\nThank you for your time and your service.",
     "personalizeBoxTitle": "ADD YOUR OWN WORDS",
     "personalizeBoxSubtitle": "Optional but encouraged: tell them why this matters to you, your family, or your community.",
     "personalizeNote": "Congressional offices count individual, personalized messages very differently from identical form letters — a sentence or two in your own words makes this count more.",
@@ -78,18 +79,21 @@
     "eyebrow": "Why this matters",
     "title": "Karly's story",
     "body": [
-      "[Amber: tell Karly's story here, with care and dignity. 2-4 short paragraphs. Center the change this bill creates, not the details of tragedy.]"
+      "Karly Rain Wood was born in Omaha, Nebraska, in April 2002. The people who knew her describe her as unapologetically herself — someone who made everyone around her feel seen, heard, and appreciated. She once told her mother, Amber, \"I don't want to be famous, I want to be successful.\"",
+      "She worked multiple jobs while teaching herself nail art, hair, makeup, cooking, and baking, and was saving to open her own beauty business and buy a home of her own.",
+      "On November 13, 2022, at 20 years old, Karly was shot and killed by repeat violent offenders after attending her first-ever party. Her case remains unsolved.",
+      "Since then, her mother Amber has turned grief into advocacy — for other victims, and for the legislation that carries her daughter's name."
     ],
-    "pullQuote": "[Amber: optional short pull-quote from Karly's family, if you want one here]"
+    "pullQuote": "Inspire confidence. Love who you are. Believe in yourself."
   },
 
   "billSummary": {
     "eyebrow": "The bill",
     "title": "What the Karly Rain Wood Act actually does",
     "points": [
-      "[Amber: plain-language bullet #1 — what S. 5245 changes]",
-      "[Amber: plain-language bullet #2 — what S. 5245 changes]",
-      "[Amber: plain-language bullet #3 — what S. 5245 changes]"
+      "Establishes the Karly Rain Wood Repeat Violent Felon Registration and Notification Program inside the U.S. Department of Justice.",
+      "Creates a national system to register and track repeat violent offenders, instead of leaving that information siloed state by state.",
+      "Strengthens communication between law enforcement jurisdictions and notifies the public, giving communities real safety information about repeat violent offenders."
     ],
     "fullTextLabel": "Read the full bill text on Congress.gov",
     "fullTextUrl": "https://www.congress.gov/bill/119th-congress/senate-bill/5245"
@@ -98,15 +102,15 @@
   "billStatus": {
     "eyebrow": "Where it stands",
     "title": "Bill status",
-    "lastUpdated": "[Amber: update this date each time you edit this section, e.g. 2026-08-28]",
-    "stage": "[Amber: e.g. Introduced / Referred to Committee / Passed Senate / Passed House / Signed into law]",
-    "statusNote": "[Amber: 1-2 sentence plain-language update on where the bill stands and what happens next]"
+    "lastUpdated": "2026-08-29",
+    "stage": "Introduced — referred to committee",
+    "statusNote": "S. 5245 (119th Congress) was introduced in the U.S. Senate on August 5, 2026, by Senator Pete Ricketts (NE), with Representative Deb Fischer (NE) as a co-sponsor. It has been referred to the Senate Committee on the Judiciary, where it now awaits a hearing or committee vote before it can move to the full Senate."
   },
 
   "endorsements": {
     "eyebrow": "Who's behind this",
     "title": "Endorsements",
-    "intro": "[Amber: replace with real endorsing organizations and public figures once confirmed. Do not publish placeholder logos/quotes as if real.]",
+    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Representative Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself. [Amber: replace the placeholder item below with real endorsing organizations/quotes once confirmed — do not publish it as if it were a real endorsement.]",
     "items": [
       {
         "name": "[Amber: organization or individual name]",
@@ -116,15 +120,17 @@
       }
     ],
     "becomeEndorserLabel": "Want your organization listed here?",
-    "becomeEndorserEmail": "[Amber: insert endorsement contact email]"
+    "becomeEndorserEmail": "StandForKarlyRain@gmail.com"
   },
 
   "donate": {
     "eyebrow": "Support the cause",
     "title": "Chip in to help pass the Karly Rain Wood Act",
-    "body": "[Amber: this section is intentionally separate from the 'contact Congress' ask above so it doesn't compete with it. Insert real fundraising copy and link once a donation processor is set up (e.g. ActBlue, Donorbox, GiveButter).]",
-    "buttonLabel": "DONATE",
-    "donateUrl": ""
+    "body": "This is intentionally separate from the \"contact Congress\" ask above so it doesn't compete with it. Gifts help support Karly's family and this campaign directly.",
+    "buttonLabel": "DONATE VIA GOFUNDME",
+    "donateUrl": "https://www.gofundme.com/f/our-perfect-queen-karly-rain",
+    "venmoHandle": "@karlyrain",
+    "_flagForAmber": "Pulled the GoFundMe URL and Venmo handle from an external source, not from you directly — please confirm both are still active/monitored before this goes live."
   },
 
   "press": {
@@ -132,14 +138,14 @@
     "title": "Press & media",
     "items": [
       {
-        "outlet": "[Amber: outlet name]",
-        "headline": "[Amber: headline]",
+        "outlet": "KETV",
+        "headline": "Mom Pleads for Answers in Daughter's Murder",
         "url": "",
         "date": ""
       }
     ],
     "mediaContactLabel": "Press inquiries",
-    "mediaContactEmail": "[Amber: insert press email — can match campaign.pressEmail]"
+    "mediaContactEmail": "StandForKarlyRain@gmail.com"
   },
 
   "faq": {
@@ -168,9 +174,13 @@
   "footer": {
     "tagline": "A campaign to pass the Karly Rain Wood Act, S. 5245.",
     "socialLinks": [
-      { "label": "Facebook", "url": "[Amber: insert URL]" },
-      { "label": "Instagram", "url": "[Amber: insert URL]" }
+      { "label": "Facebook", "url": "https://www.facebook.com/StandUpForKarlyRain" },
+      { "label": "Facebook Group", "url": "https://www.facebook.com/groups/RememberKarlyRain" },
+      { "label": "Instagram", "url": "https://www.instagram.com/standupforkarlyrain" },
+      { "label": "YouTube", "url": "https://www.youtube.com/@KarlyRain" },
+      { "label": "TikTok", "url": "https://www.tiktok.com/@sayhernamekarlyrain" }
     ],
-    "contactEmail": "[Amber: insert general contact email]"
+    "contactEmail": "StandForKarlyRain@gmail.com",
+    "_flagForAmber": "These 5 links were constructed from the handles you gave (e.g. @StandUpForKarlyRain -> facebook.com/StandUpForKarlyRain) using each platform's standard URL pattern, not copied from a working link — please click through all 5 before launch, especially the Facebook group (groups often use a numeric ID instead of a vanity slug, so facebook.com/groups/RememberKarlyRain may 404 even if the handle is right)."
   }
 }

@@ -59,7 +59,11 @@ export default function ActionFlow({ content }: { content: SiteContent }) {
       if (!res.ok) {
         track("find_reps_error", { code: data.code || "UNKNOWN" });
         setLookupError(
-          data.code === "NO_MATCH" ? lookupStep.errorNoMatch : lookupStep.errorGeneric
+          data.code === "NO_MATCH"
+            ? lookupStep.errorNoMatch
+            : data.code === "NOT_CONFIGURED"
+              ? lookupStep.errorNotConfigured
+              : lookupStep.errorGeneric
         );
         setResult(null);
         return;

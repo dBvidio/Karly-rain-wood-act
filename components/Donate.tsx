@@ -22,6 +22,11 @@ export default function Donate({ content }: { content: SiteContent }) {
         ) : (
           <p className="mt-5 text-xs text-ink-500">[Amber: add a donation link to enable this button]</p>
         )}
+        {donate.venmoHandle && (
+          <p className="mt-3 text-sm text-ink-700">
+            Prefer Venmo? Send to <span className="font-semibold">{donate.venmoHandle}</span>
+          </p>
+        )}
       </div>
     </section>
   );
