@@ -2,25 +2,19 @@ import type { Config } from "tailwindcss";
 
 // PALETTE STATUS (flagged for Amber — read before changing):
 //
-// Previously this file held a placeholder rose/cream guess because the
-// build environment couldn't reach KarlyRain.com at all. It has now been
-// updated to a hot-pink / black / white palette per your direct
-// description: "bright pink/magenta with black nav and white background
-// ... header banner hot pink (~#E6007E-#EC1E79 range) ... nav bar black
-// ... body white ... headline text black."
+// These values were pulled directly from KarlyRain.com's live DOM via
+// computed styles (not a screenshot guess) and confirmed by you as final:
+//   - `pink-light` #f7a1da — top banner accent / lighter secondary accent
+//   - `rain[500]`  #ab0e7b — dominant brand color (main section
+//     backgrounds, buttons on the real site); used here as the primary
+//     CTA/accent color, replacing the earlier #e6007e guess
+//   - `black`      #000000 — nav/text
+// The rest of the `rain` ramp (50-900) is generated tints/shades of
+// #ab0e7b so every shade in the site stays one consistent hue family.
 //
-// IMPORTANT CAVEAT: this build environment still cannot reach
-// karlyrain.com, karlyrainwoodact.com, or sites.google.com (organization
-// network policy blocks all three — confirmed via curl, WebFetch, and the
-// proxy's own status log, not a transient failure). That means the exact
-// hex below (#e6007e) was NOT sampled by me from a real screenshot or
-// pixel-picked from the live site — it's the first value in the range you
-// gave me. Please pixel-sample the real header banner yourself (e.g.
-// browser DevTools color picker, or drop a screenshot here) and correct
-// `rain[500]` below if it's off; the rest of the ramp (50-900) was
-// generated programmatically as tints/shades of that one value, so fixing
-// `500` and regenerating the ramp is the only edit needed if the exact hex
-// changes.
+// This build environment still cannot reach karlyrain.com, sites.google.com,
+// or karlyrainwoodact.com (organization network policy blocks all three),
+// so these values are taken as given, not independently re-verified by me.
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -30,38 +24,41 @@ const config: Config = {
     extend: {
       colors: {
         rain: {
-          50: "#ffebf6",
-          100: "#ffd6ed",
-          200: "#ffa8d8",
-          300: "#ff66ba",
-          400: "#ff1a97",
-          500: "#e6007e", // primary hot pink/magenta — unverified exact value, see caveat above
-          600: "#b30062",
-          700: "#800046",
-          800: "#570030",
-          900: "#39001f",
+          50: "#fdecf8",
+          100: "#fbd0ee",
+          200: "#f7a1da", // = pink-light, the lighter secondary/banner accent
+          300: "#f368c8",
+          400: "#ee2bb2",
+          500: "#ab0e7b", // primary brand color — verified from KarlyRain.com computed styles
+          600: "#850b60",
+          700: "#600845",
+          800: "#3a052a",
+          900: "#1e0215",
         },
+        // Named alias for the lighter secondary accent, matching how you
+        // described it ("pink-light") — same value as rain[200].
+        "pink-light": "#f7a1da",
         // Soft pink tints for secondary surfaces (chips, gradients) — same
         // hue family as `rain`, just lighter, so they read as one palette.
         blush: {
-          50: "#ffebf6",
-          100: "#ffd6ed",
-          200: "#ffa8d8",
+          50: "#fdecf8",
+          100: "#fbd0ee",
+          200: "#f7a1da",
         },
         ink: {
-          900: "#0d0d0d", // near-black, for headline text / "black nav" contrast
+          900: "#000000", // true black, per verified "nav/text" black
           700: "#2b2b2b",
           500: "#5c5c5c",
         },
-        cream: "#ffffff", // legacy token name; value is now real white per "body white"
-        gold: "#e8b34c", // unverified secondary accent — no secondary accent color was given; keep, adjust, or drop once confirmed
+        cream: "#ffffff", // legacy token name; value is real white per "body white"
+        gold: "#e8b34c", // unverified secondary accent — no accent color was confirmed for this; keep, adjust, or drop once confirmed
       },
       fontFamily: {
         display: ["'Fraunces'", "Georgia", "serif"],
         body: ["'Inter'", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        soft: "0 10px 30px -12px rgba(13, 13, 13, 0.25)",
+        soft: "0 10px 30px -12px rgba(0, 0, 0, 0.25)",
       },
       borderRadius: {
         xl2: "1.25rem",

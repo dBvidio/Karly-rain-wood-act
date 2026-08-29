@@ -188,36 +188,38 @@ another provider by editing that one file if preferred.
 
 ---
 
-## Visual design — palette & type (flagged for review)
+## Visual design — palette & type
 
-Updated from the placeholder rose/cream guess to a hot-pink / black / white
-palette, per your direct description of KarlyRain.com (this environment
-still cannot reach karlyrain.com, sites.google.com, or
-karlyrainwoodact.com — confirmed via curl, WebFetch, and the network
-proxy's own status log all agreeing it's an organization policy block, not
-a transient failure — so nothing here was independently pixel-verified by
-me):
+**Resolved and confirmed final.** You pulled these directly from
+KarlyRain.com's live DOM via computed styles (not a screenshot guess) and
+confirmed them as final — no more re-checking needed on these values:
 
 | Token | Value | Source |
 |---|---|---|
-| `rain[500]` (primary CTA/accent) | `#e6007e` | First value in the `#E6007E`-`#EC1E79` range you gave — **please pixel-sample the real header banner yourself and correct this if it's off**; the rest of the `rain` ramp (50-900) is generated tints/shades of this one value |
-| `ink[900]` (headline text, footer/sticky-bar background) | `#0d0d0d` | Near-black, per "headline text black" / "nav bar black" |
-| `cream` (body background; legacy token name, kept to avoid touching every component) | `#ffffff` | Per "body white" |
-| `gold` (secondary accent, used on 2 card borders) | `#e8b34c` unchanged | No secondary accent color was given — flagged as still unverified; drop or replace once you confirm whether the real site has one |
+| `rain[500]` / primary CTA-accent | `#ab0e7b` | Dominant brand color (main section backgrounds, buttons on the real site) — replaces the earlier `#e6007e` guess |
+| `pink-light` (= `rain[200]`) | `#f7a1da` | Lighter secondary accent (top banner) |
+| `ink[900]` / "black" | `#000000` | Nav/text — true black, replacing the earlier `#0d0d0d` approximation |
+| `cream` (body background; legacy token name, kept to avoid touching every component) | `#ffffff` | Body white |
+| `gold` (secondary accent, used on 2 card borders) | `#e8b34c` unchanged | Still unverified — no secondary accent beyond `pink-light` was confirmed; drop or replace if it clashes |
+
+The rest of the `rain` ramp (50-900) is generated tints/shades of
+`#ab0e7b`, so `rain[200]` lands almost exactly on `#f7a1da` on its own —
+both values are the same hue at different lightness, which is a good
+consistency signal that this is one coherent brand color, not two.
 
 There's no top nav bar in this single-page design, so "black nav" was
 applied to its closest equivalents: the mobile sticky action bar and the
-footer are now `ink-900` (near-black) with white text, rather than
-literally adding a nav element that doesn't otherwise fit the layout.
+footer are `ink-900` (true black) with white text, rather than literally
+adding a nav element that doesn't otherwise fit the layout.
 
 Typography is unchanged — `Fraunces` (display/serif) + `Inter` (body),
-both Google Fonts — since no font names were given this round; swap the
-imports in `app/layout.tsx` if KarlyRain.com uses something specific.
+both Google Fonts — since no font names have been given; swap the imports
+in `app/layout.tsx` if KarlyRain.com uses something specific.
 
 Verified by screenshot (local build; see chat for before/after images):
-CTA button renders `rgb(230, 0, 126)` = `#e6007e`, body background
-`rgb(255, 255, 255)` = white, H1 text `rgb(13, 13, 13)` = `#0d0d0d`, footer
-background `rgb(13, 13, 13)`.
+CTA button renders `rgb(171, 14, 123)` = `#ab0e7b`, body background
+`rgb(255, 255, 255)` = white, H1 text `rgb(0, 0, 0)` = `#000000`, footer
+background `rgb(0, 0, 0)`.
 
 ---
 
@@ -281,14 +283,10 @@ or Amber directly, so unverified):**
   Facebook group: Facebook groups often use a numeric ID rather than a
   vanity slug, so `facebook.com/groups/RememberKarlyRain` may 404 even
   though the handle itself is right.
-- **Sponsor titles** (`billStatus.statusNote`): you specified Senator Pete
-  Ricketts (NE) as primary sponsor and *Representative* Deb Fischer (NE) as
-  co-sponsor. I used that verbatim since it's what you sourced — but
-  flagging it because Deb Fischer is publicly known as a sitting U.S.
-  *Senator* from Nebraska, not a Representative. Worth double-checking
-  against the bill's actual cosponsor listing on Congress.gov before this
-  goes live, since a wrong chamber/title on a specific, checkable fact is
-  the kind of error that undermines credibility fast.
+- ~~**Sponsor titles**~~ — **resolved.** You confirmed Deb Fischer is a
+  sitting U.S. Senator (NE), not a Representative; `billStatus.statusNote`
+  and `endorsements.intro` now both read "Senator Deb Fischer" as a Senate
+  co-sponsor alongside Senator Pete Ricketts.
 
 Nothing about Karly, the bill's text, or endorsers has been invented —
 everything above is either sourced from what you provided, or an explicit

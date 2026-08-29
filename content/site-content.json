@@ -104,13 +104,13 @@
     "title": "Bill status",
     "lastUpdated": "2026-08-29",
     "stage": "Introduced — referred to committee",
-    "statusNote": "S. 5245 (119th Congress) was introduced in the U.S. Senate on August 5, 2026, by Senator Pete Ricketts (NE), with Representative Deb Fischer (NE) as a co-sponsor. It has been referred to the Senate Committee on the Judiciary, where it now awaits a hearing or committee vote before it can move to the full Senate."
+    "statusNote": "S. 5245 (119th Congress) was introduced in the U.S. Senate on August 5, 2026, by Senator Pete Ricketts (NE), with Senator Deb Fischer (NE) as a Senate co-sponsor. It has been referred to the Senate Committee on the Judiciary, where it now awaits a hearing or committee vote before it can move to the full Senate."
   },
 
   "endorsements": {
     "eyebrow": "Who's behind this",
     "title": "Endorsements",
-    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Representative Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself.",
+    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Senator Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself.",
     "_note": "The 'intro' text above IS shown to visitors, so keep it real-content-only. The placeholder item below is intentionally NOT shown to visitors (the site hides any endorsement whose name/quote still contains '[Amber:') — replace it with a real endorsement, or add more items, whenever you have one confirmed. Do not fabricate a quote to fill the gap.",
     "items": [
       {
