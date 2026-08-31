@@ -25,10 +25,19 @@ export default function BillSummary({ content }: { content: SiteContent }) {
           href={billSummary.fullTextUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="focus-ring mt-4 inline-block text-sm font-semibold text-rain-600 underline"
+          className="focus-ring mt-4 inline-block rounded-full border-2 border-rain-500 px-6 py-3 text-sm font-bold tracking-wide text-rain-600 transition hover:bg-rain-500 hover:text-white active:scale-[0.98]"
         >
           {billSummary.fullTextLabel}
         </a>
+
+        {billSummary.didYouKnow && (
+          <div className="mt-6 rounded-xl2 border-2 border-gold bg-white p-5 shadow-sm">
+            <p className="text-sm font-semibold text-ink-900">{billSummary.didYouKnow.stat}</p>
+            <p className="mt-3 font-display text-sm font-extrabold uppercase leading-snug tracking-wide text-rain-600">
+              {billSummary.didYouKnow.callout}
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

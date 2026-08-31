@@ -5,7 +5,9 @@ export default function Footer({ content }: { content: SiteContent }) {
   return (
     <footer className="bg-ink-900 px-5 py-10 text-cream">
       <div className="mx-auto max-w-2xl text-center">
-        <p className="font-display text-xl font-bold">{campaign.hashtag}</p>
+        <p className="font-display text-xl font-bold">
+          {campaign.hashtag} {campaign.hashtag2}
+        </p>
         <p className="mt-2 text-sm text-cream/70">{footer.tagline}</p>
 
         <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">

@@ -3,6 +3,7 @@
 
   "campaign": {
     "hashtag": "#Pass5245",
+    "hashtag2": "#KarlyRainWoodAct",
     "billNumber": "S. 5245",
     "billName": "Karly Rain Wood Act",
     "communityName": "Karly's Angels Army",
@@ -47,8 +48,9 @@
   },
 
   "sidebar": {
-    "_note": "Powers the simplified two-panel sidebar (photo + The Ask + The Details), modeled on the ANCOR/VoterVoice reference layout. Keep this short — the whole point of that layout is that it's NOT a wall of text.",
-    "eyebrow": "#Pass5245",
+    "_note": "Powers the simplified two-panel sidebar (hero block + photo + The Ask + The Details), modeled on the ANCOR/VoterVoice reference layout. Keep the Ask/Details part short — the whole point of that layout is that it's NOT a wall of text.",
+    "eyebrow": "#Pass5245 · #KarlyRainWoodAct",
+    "challengeCta": "CHALLENGE YOUR REPRESENTATIVES TO SUPPORT THIS NON-PARTISAN PUBLIC SAFETY COMMON SENSE BILL!",
     "askHeading": "The Ask:",
     "askBody": "Ask your members of Congress to support and help advance the Karly Rain Wood Act, S. 5245.",
     "detailsHeading": "The Details:",
@@ -58,7 +60,7 @@
     ],
     "ctaLine": "Contact your members of Congress today and urge them to support the Karly Rain Wood Act.",
     "takeActionLabel": "Take action",
-    "footerLine": "#Pass5245 · Karly's Angels Army"
+    "footerLine": "#Pass5245 · #KarlyRainWoodAct · Karly's Angels Army"
   },
 
   "lookupStep": {
@@ -101,7 +103,7 @@
   "confirmation": {
     "headline": "You just became part of Karly's Angels Army.",
     "subhead": "You did it. Now multiply your voice.",
-    "shareText": "I just asked Congress to support the Karly Rain Wood Act, S. 5245. Will you join me? #Pass5245",
+    "shareText": "I just asked Congress to support the Karly Rain Wood Act, S. 5245. Will you join me? #Pass5245 #KarlyRainWoodAct",
     "textShareLabel": "TEXT THIS TO 3 PEOPLE",
     "facebookShareLabel": "SHARE ON FACEBOOK",
     "copyLinkLabel": "COPY KARLYRAINWOODACT.COM/TAKEACTION",
@@ -137,6 +139,10 @@
       "Creates a national system to register and track repeat violent offenders, instead of leaving that information siloed state by state.",
       "Strengthens communication between law enforcement jurisdictions and notifies the public, giving communities real safety information about repeat violent offenders."
     ],
+    "didYouKnow": {
+      "stat": "Did you know: Approximately 2% of the population is responsible for nearly 75% of violent crimes? And 80% of violent offenders reoffend within 3 years of being released.",
+      "callout": "VIOLENT FELONS AND THE ENTITIES THAT RELEASE THEM SHOULD BE HELD ACCOUNTABLE AND TRANSPARENT TO THE PUBLIC — SIMILAR TO THE SEX OFFENDERS REGISTRY. PUBLIC SAFETY MATTERS!"
+    },
     "fullTextLabel": "Read the full bill text on Congress.gov",
     "fullTextUrl": "https://www.congress.gov/bill/119th-congress/senate-bill/5245"
   },
@@ -153,7 +159,7 @@
   "endorsements": {
     "eyebrow": "Who's behind this",
     "title": "Endorsements",
-    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Senator Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself.",
+    "intro": "S. 5245 is sponsored by Senator Pete Ricketts (NE) and co-sponsored by Senator Deb Fischer (NE) — see \"Bill status\" above for that. This section is for organizations and public figures who have endorsed the campaign itself. And please ask your representatives and organizations to endorse this bill.",
     "_note": "The 'intro' text above IS shown to visitors, so keep it real-content-only. The placeholder item below is intentionally NOT shown to visitors (the site hides any endorsement whose name/quote still contains '[Amber:') — replace it with a real endorsement, or add more items, whenever you have one confirmed. Do not fabricate a quote to fill the gap.",
     "items": [
       {
@@ -164,7 +170,27 @@
       }
     ],
     "becomeEndorserLabel": "Want your organization listed here?",
-    "becomeEndorserEmail": "StandForKarlyRain@gmail.com"
+    "becomeEndorserEmail": "StandForKarlyRain@gmail.com",
+    "selfEndorseCtaLabel": "Endorse This Campaign"
+  },
+
+  "endorseForm": {
+    "title": "Endorse the Karly Rain Wood Act",
+    "intro": "Tell us who you are and how you'd like to help — we'll follow up and add you to the endorsements list.",
+    "nameLabel": "Name",
+    "cityLabel": "City",
+    "groupLabel": "Group / business (optional)",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone (optional)",
+    "helpTypeLabel": "How would you like to help?",
+    "helpTypeOptions": ["Get involved", "Donate", "Both"],
+    "submitLabel": "Submit",
+    "submittingLabel": "Submitting…",
+    "successHeadline": "Thank you.",
+    "successBody": "We've received your endorsement and will follow up soon.",
+    "closeLabel": "Close",
+    "errorGeneric": "Something went wrong submitting that. Please try again.",
+    "errorRequired": "Please fill in all required fields."
   },
 
   "donate": {
@@ -186,6 +212,12 @@
         "headline": "Mom Pleads for Answers in Daughter's Murder",
         "url": "",
         "date": ""
+      },
+      {
+        "outlet": "WOWT Channel 6 News",
+        "headline": "Karly Rain Wood Act: Omaha mother pushes national registry for repeat violent offenders",
+        "url": "https://www.wowt.com/2026/08/06/karly-rain-wood-act-omaha-mother-pushes-national-registry-repeat-violent-offenders/",
+        "date": "2026-08-06"
       },
       {
         "outlet": "First Alert 6",
@@ -219,7 +251,7 @@
       },
       {
         "question": "I don't live in a state with a sponsor — should I still take action?",
-        "answer": "Yes. Every constituent message to every office, sponsor or not, helps build momentum and signals nationwide support."
+        "answer": "Absolutely yes! This is happening across the country — repeat violent offenders live in every neighborhood, and every voter and every constituent has a voice. We hope you message every office, whether they are a sponsor or not. This helps build momentum, awareness, and signals nationwide support. CHALLENGE YOUR REPRESENTATIVE TO ENDORSE AND GET BEHIND THE KARLY RAIN WOOD ACT — PASS 5245. YOUR VOICE MATTERS!"
       }
     ]
   },

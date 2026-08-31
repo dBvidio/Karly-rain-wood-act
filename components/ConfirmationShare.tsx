@@ -68,7 +68,9 @@ export default function ConfirmationShare({ content }: { content: SiteContent })
         </button>
       </div>
 
-      <p className="mt-6 text-lg font-bold text-rain-600">{campaign.hashtag}</p>
+      <p className="mt-6 text-lg font-bold text-rain-600">
+        {campaign.hashtag} {campaign.hashtag2}
+      </p>
 
       <p className="mt-2 text-sm text-ink-500">
         {count !== null
