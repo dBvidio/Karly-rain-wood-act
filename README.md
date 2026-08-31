@@ -456,69 +456,33 @@ there's no JS/media-query logic duplicating the layout.
 
 ## Images
 
-Four real photos are wired into the layout with real alt text (see the
-`images` block in `content/site-content.json` for the exact source-of-truth
-paths/alt text):
+**Resolved — all 4 photos are in place.** After two rounds of chat
+attachments not making it to disk (pasted/inline images aren't readable
+files in this environment, and one earlier attachment didn't match its
+filename — see git history on this file for the full story if useful
+context later), the files were pushed directly to the repo via GitHub's
+web upload, which sidesteps chat entirely. They landed at the repo root
+rather than `public/images/`; moved into place with `git mv`.
 
-| Photo | Used in | Path (not yet present — see below) |
-|---|---|---|
-| Karly portrait | Sidebar | `/public/images/karly-portrait.jpg` |
-| "Forever in Our Hearts" memorial poster | Karly's story section | `/public/images/karly-memorial-poster.jpg` |
-| "We Will Never Forget" yard sign | Community/movement section | `/public/images/never-forget-yard-sign.jpg` |
-| Local TV news coverage | Press & media section | `/public/images/press-tv-coverage.jpg` |
+**Before wiring anything in, each file was opened and visually confirmed
+to actually match its filename** — not taken on faith a second time:
 
-**Still blocked — 0 of 4 photos are actually in place.** Two separate
-obstacles, both real:
+| Photo | Used in | Path | Notes |
+|---|---|---|---|
+| Karly portrait | Sidebar | `/public/images/karly-portrait.jpg` | Used as-is |
+| "Forever in Our Hearts" memorial poster | Karly's story section | `/public/images/karly-memorial-poster.jpg` | Cropped — the original was a phone-gallery screenshot with a status bar and a "Celebration of Life" caption baked in below it; cropped down to just the poster itself. The gallery's semi-transparent prev/next arrow icons are still faintly visible over the image (baked into the screenshot's pixels, not something a rectangular crop can remove) — cosmetically minor, but worth a real re-photograph of just the poster if a cleaner version is wanted later. |
+| "We Will Never Forget" yard sign | Community/movement section | `/public/images/never-forget-yard-sign.jpg` | Used as-is, resized/compressed for web |
+| First Alert 6 news graphic ("Karly Rain Wood Act Introduced") | Press & media section | `/public/images/press-tv-coverage.jpg` | Used as-is, resized/compressed for web |
 
-1. **Inline/pasted images aren't readable files.** When you shared 5
-   photos directly in the chat message, they're visible to me for
-   description, but this environment has no file for them — only an
-   actual file *attachment* (paperclip/drag-and-drop) lands on disk where
-   code here can read, convert, or save it. None of the 4 core photos have
-   come through that way yet.
-2. **The one attachment sent so far didn't match its filename.** You did
-   attach a file named `IMG_20260820_094827.HEIC` (meant to be the TV news
-   screenshot). Its actual contents, once decoded, turned out to be an
-   unrelated photo — three people at what looks like an event with a flag
-   backdrop, not the "KARLY RAIN WOOD ACT INTRODUCED" news graphic shown
-   inline in your message. I sent you that decoded image in chat to
-   confirm. Rather than caption a real photo of real people with a
-   headline that describes a different image, I deliberately left it
-   unwired — `press.items[1].imageSrc` is blank, not pointed at a
-   mismatched photo. (The `pillow-heif` install and HEIC→JPEG conversion
-   pipeline itself worked fine — that's not the problem.)
+All 4 were also resized/recompressed for web (largest is ~400KB, the
+yard sign at 1050×1400).
 
-A follow-up message shared all 5 images again (same 5, "labelled" this
-time) — but I checked the upload directory before touching anything, and
-confirmed nothing new landed on disk. The labeling wasn't the problem
-last time (I'd already correctly identified all 5 images by content); the
-problem both times has been the *transport*: pasting/dragging an image
-into the message body only makes it visible to me, it doesn't create a
-file. Only the paperclip/attach-file action does that — it's the only
-reason the HEIC file reached disk at all.
-
-**To actually finish this, two options:**
-1. Use the chat's file-attach control specifically (not paste/drag into
-   the message text) for each of the 4 files, one at a time if that's more
-   reliable. Confirm the exact filename before sending so a repeat of the
-   HEIC mismatch doesn't happen again.
-2. **Probably more reliable at this point, given two rounds of attachment
-   trouble:** push the 4 files directly into the repo yourself, at exactly
-   `public/images/karly-portrait.jpg`, `karly-memorial-poster.jpg`,
-   `never-forget-yard-sign.jpg`, and `press-tv-coverage.jpg`, via GitHub's
-   web "Add file → Upload files" on this branch. That sidesteps the chat
-   entirely — I'll pick them up on the next pull.
-
-The code is fully wired against those 4 target paths (Next.js `<Image>`
-components, correct `sizes`, real alt text already written); the moment
-real files land there, everything works with zero further code changes.
-
-Verified (see chat for screenshots): with the files absent, Next's image
-optimizer correctly 400s each request rather than crashing the page or
-showing a fabricated placeholder box — confirmed via network response
-codes, not just visual inspection. That 400 is the honest, expected state
-until real files exist; it is not a bug and no amount of further code
-changes will resolve it without the actual image bytes.
+Verified end to end, not just "the file exists": `/_next/image` requests
+for all 4 return 200 (were 400 before), all 4 render in their correct
+sections at the correct viewports (see screenshots), no `[Amber:]`
+placeholder text remains anywhere, the 40/60 desktop split and mobile
+stacking are unaffected, and the full find-lawmakers → personalize →
+send → confirmation flow still works with 0 JS errors.
 
 ## Project structure
 
