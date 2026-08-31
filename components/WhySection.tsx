@@ -1,7 +1,8 @@
+import Image from "next/image";
 import type { SiteContent } from "@/lib/content";
 
 export default function WhySection({ content }: { content: SiteContent }) {
-  const { why } = content;
+  const { why, images } = content;
   return (
     <section className="bg-white px-5 py-14">
       <div className="mx-auto max-w-2xl">
@@ -19,6 +20,16 @@ export default function WhySection({ content }: { content: SiteContent }) {
             {why.pullQuote}
           </blockquote>
         )}
+
+        <div className="relative mt-6 aspect-[4/3] w-full overflow-hidden rounded-xl2 shadow-sm">
+          <Image
+            src={images.memorialPoster.src}
+            alt={images.memorialPoster.alt}
+            fill
+            sizes="(min-width: 1024px) 640px, 100vw"
+            className="object-cover"
+          />
+        </div>
       </div>
     </section>
   );

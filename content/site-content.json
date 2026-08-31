@@ -14,6 +14,26 @@
     "pressEmail": "StandForKarlyRain@gmail.com"
   },
 
+  "images": {
+    "_note": "Real photo files must be placed at these exact paths in /public/images/ — none exist yet (blocked: source files are on a local machine this build environment can't reach, not attached to the conversation). Alt text below is already final; nothing else needs to change once the files land.",
+    "karlyPortrait": {
+      "src": "/images/karly-portrait.jpg",
+      "alt": "Portrait photo of Karly Rain Wood"
+    },
+    "memorialPoster": {
+      "src": "/images/karly-memorial-poster.jpg",
+      "alt": "\"Forever in Our Hearts\" memorial poster for Karly Rain Wood"
+    },
+    "yardSign": {
+      "src": "/images/never-forget-yard-sign.jpg",
+      "alt": "\"We Will Never Forget\" yard sign supporting the Karly Rain Wood Act"
+    },
+    "pressScreenshot": {
+      "src": "/images/press-tv-coverage.jpg",
+      "alt": "Local television news coverage of the Karly Rain Wood Act"
+    }
+  },
+
   "hero": {
     "headline": "TELL CONGRESS: SUPPORT THE KARLY RAIN WOOD ACT",
     "subhead": "Help us pass S. 5245",
@@ -87,6 +107,13 @@
     "pullQuote": "Inspire confidence. Love who you are. Believe in yourself."
   },
 
+  "community": {
+    "eyebrow": "Join the movement",
+    "title": "Karly's Angels Army is already showing up",
+    "body": "Yard signs, memorials, and everyday conversations are keeping Karly's story — and this bill — impossible to ignore. Every person who takes action below adds to that.",
+    "photoCaption": "\"We Will Never Forget\" — a yard sign from Karly's Angels Army"
+  },
+
   "billSummary": {
     "eyebrow": "The bill",
     "title": "What the Karly Rain Wood Act actually does",
@@ -104,7 +131,8 @@
     "title": "Bill status",
     "lastUpdated": "2026-08-29",
     "stage": "Introduced — referred to committee",
-    "statusNote": "S. 5245 (119th Congress) was introduced in the U.S. Senate on August 5, 2026, by Senator Pete Ricketts (NE), with Senator Deb Fischer (NE) as a Senate co-sponsor. It has been referred to the Senate Committee on the Judiciary, where it now awaits a hearing or committee vote before it can move to the full Senate."
+    "statusNote": "S. 5245 (119th Congress) was introduced in the U.S. Senate on August 5, 2026, by Senator Pete Ricketts (NE), with Senator Deb Fischer (NE) as a Senate co-sponsor. It has been referred to the Senate Committee on the Judiciary, where it now awaits a hearing or committee vote before it can move to the full Senate.",
+    "sponsorsShort": "Sen. Pete Ricketts (NE), Sen. Deb Fischer (NE)"
   },
 
   "endorsements": {
@@ -143,6 +171,15 @@
         "headline": "Mom Pleads for Answers in Daughter's Murder",
         "url": "",
         "date": ""
+      },
+      {
+        "outlet": "Local TV News",
+        "headline": "Local news coverage of the Karly Rain Wood Act",
+        "url": "",
+        "date": "",
+        "imageSrc": "/images/press-tv-coverage.jpg",
+        "imageAlt": "Local television news coverage of the Karly Rain Wood Act",
+        "_note": "outlet/headline are intentionally generic — the real station name and on-screen headline haven't been read off the actual screenshot yet (this build environment doesn't have the file). Update both once you can read the exact text off the screenshot."
       }
     ],
     "mediaContactLabel": "Press inquiries",

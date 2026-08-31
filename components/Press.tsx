@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { SiteContent } from "@/lib/content";
 
 export default function Press({ content }: { content: SiteContent }) {
@@ -13,17 +14,30 @@ export default function Press({ content }: { content: SiteContent }) {
         </h2>
         <ul className="mt-4 space-y-3">
           {press.items.map((item, i) => (
-            <li key={i} className="rounded-xl bg-white p-4 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-wide text-rain-600">
-                {item.outlet}
-              </p>
-              {item.url ? (
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="focus-ring font-semibold text-ink-900 underline">
-                  {item.headline}
-                </a>
-              ) : (
-                <p className="font-semibold text-ink-900">{item.headline}</p>
+            <li key={i} className="overflow-hidden rounded-xl bg-white shadow-sm">
+              {item.imageSrc && (
+                <div className="relative aspect-video w-full">
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.imageAlt || item.headline}
+                    fill
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
               )}
+              <div className="p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-rain-600">
+                  {item.outlet}
+                </p>
+                {item.url ? (
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" className="focus-ring font-semibold text-ink-900 underline">
+                    {item.headline}
+                  </a>
+                ) : (
+                  <p className="font-semibold text-ink-900">{item.headline}</p>
+                )}
+              </div>
             </li>
           ))}
         </ul>

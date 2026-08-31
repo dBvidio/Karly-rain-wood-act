@@ -426,19 +426,85 @@ no `cookies()`/`headers()`, fetches already opt out of caching with
 
 ---
 
+## Layout — two-panel sidebar structure
+
+The page is now a two-panel ANCOR-style layout instead of a single stacked
+column:
+
+- **`<aside>`** (`components/Sidebar.tsx`) — `rain-500` (`#ab0e7b`)
+  background, white text. Holds the `#Pass5245` wordmark, headline, Karly's
+  portrait photo, "The Ask," a "TAKE ACTION" button, "The Details" (bill
+  number/status/sponsors), and the 3 short reasons. On desktop (`lg:`
+  breakpoint and up) it's a fixed-width (`w-96`), sticky, independently
+  scrolling column pinned to the left. Below that breakpoint it's a normal
+  block that stacks above `<main>` in document order — no separate mobile
+  layout to maintain, it's the same component either way.
+- **`<main>`** — white background, holds the interactive flow
+  (`ActionFlow`) and every below-the-fold section (Karly's story,
+  Community, bill summary/status, endorsements, donate, press, FAQ,
+  footer).
+
+`app/page.tsx` wraps both in a `flex flex-col lg:flex-row` container, so
+the breakpoint is the only thing that changes stacked-vs-side-by-side;
+there's no JS/media-query logic duplicating the layout.
+
+## Images
+
+Four real photos are wired into the layout with real alt text (see the
+`images` block in `content/site-content.json` for the exact source-of-truth
+paths/alt text):
+
+| Photo | Used in | Path (not yet present — see below) |
+|---|---|---|
+| Karly portrait | Sidebar | `/public/images/karly-portrait.jpg` |
+| "Forever in Our Hearts" memorial poster | Karly's story section | `/public/images/karly-memorial-poster.jpg` |
+| "We Will Never Forget" yard sign | Community/movement section | `/public/images/never-forget-yard-sign.jpg` |
+| Local TV news coverage | Press & media section | `/public/images/press-tv-coverage.jpg` |
+
+**Blocked — genuinely can't fix from here, not a code problem:** the
+source files live at an absolute path on your own local Mac
+(`/Users/denlisbertrand/Documents/Karly Rain Wood Act/`). This build
+environment is a separate cloud sandbox with no access to your local
+filesystem — confirmed (`/Users` doesn't exist on this machine at all).
+The code is fully wired and tested against these exact paths (Next.js
+`<Image>` components, correct `sizes`, real alt text already written) —
+the moment real JPGs land at those 4 paths, everything works with zero
+code changes. To get them here, either:
+1. Attach the 4 files directly in this conversation, or
+2. Commit/push them into the repo yourself (e.g. via GitHub's web upload)
+   at exactly those paths.
+
+The 4th file (`IMG_20260820_094827.jpg`/`.HEIC`) is a TV news screenshot —
+if it's `.HEIC`, either convert it before sending (any online converter,
+or macOS Preview → File → Export → JPEG) or send the `.HEIC` as-is and
+I'll convert it here (this environment has network access to PyPI, so
+`pillow-heif` is installable). Also: I can't read what's on-screen in that
+screenshot, so `press.items[1].outlet` and `.headline` in
+`content/site-content.json` are currently generic placeholders ("Local TV
+News" / "Local news coverage of the Karly Rain Wood Act") — update those
+to the real station name and headline once you can read the screenshot.
+
+Verified (see chat for screenshots): with the files absent, Next's image
+optimizer correctly 400s each request rather than crashing the page or
+showing a fabricated placeholder box — confirmed via network response
+codes, not just visual inspection. That 400 is the honest, expected state
+until real files exist; it is not a bug and no amount of further code
+changes will resolve it without the actual image bytes.
+
 ## Project structure
 
 ```
 app/
   layout.tsx          SEO/OG metadata, fonts
-  page.tsx             composes all sections
+  page.tsx             two-panel shell: <Sidebar/> + <main> with everything else
   take-action/          /take-action → redirects to #action
   api/lookup/route.ts    ZIP/address → lawmakers (Geocodio)
   api/counter/route.ts   action counter (GET/POST)
-components/            Hero, ActionFlow (the 3-step flow), ConfirmationShare,
-                        LawmakerCard, PromptChips, StickyCta, and all
-                        below-the-fold sections
-content/site-content.json   ALL editable copy — see "How Amber updates content"
+components/            Sidebar, ActionFlow (the 3-step flow), ConfirmationShare,
+                        LawmakerCard, PromptChips, StickyCta, Community, and
+                        all other below-the-fold sections
+content/site-content.json   ALL editable copy, incl. the `images` block — see
+                             "How Amber updates content"
 lib/                   content loader, Geocodio provider, counter store,
-                        analytics, shared types
+                        analytics, placeholder-hiding helper, shared types
 ```
