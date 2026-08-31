@@ -1,6 +1,7 @@
 import { getContent } from "@/lib/content";
 import Sidebar from "@/components/Sidebar";
 import StickyCta from "@/components/StickyCta";
+import MainIntro from "@/components/MainIntro";
 import ActionFlow from "@/components/ActionFlow";
 import WhySection from "@/components/WhySection";
 import Community from "@/components/Community";
@@ -19,6 +20,7 @@ export default function Home() {
     <div className="flex flex-col pb-20 sm:pb-0 lg:flex-row lg:pb-0">
       <Sidebar content={content} />
       <main className="min-w-0 flex-1 bg-white">
+        <MainIntro content={content} />
         <ActionFlow content={content} />
         <WhySection content={content} />
         <Community content={content} />

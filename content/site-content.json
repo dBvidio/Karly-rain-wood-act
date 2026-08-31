@@ -46,6 +46,21 @@
     ]
   },
 
+  "sidebar": {
+    "_note": "Powers the simplified two-panel sidebar (photo + The Ask + The Details), modeled on the ANCOR/VoterVoice reference layout. Keep this short — the whole point of that layout is that it's NOT a wall of text.",
+    "eyebrow": "#Pass5245",
+    "askHeading": "The Ask:",
+    "askBody": "Ask your members of Congress to support and help advance the Karly Rain Wood Act, S. 5245.",
+    "detailsHeading": "The Details:",
+    "detailsBody": [
+      "The Karly Rain Wood Act would create a national registry and notification program at the U.S. Department of Justice for repeat violent offenders — strengthening communication between law enforcement jurisdictions and giving communities real safety information.",
+      "It's named for Karly Rain Wood, a 20-year-old Nebraska woman shot and killed by repeat violent offenders in November 2022. Her case remains unsolved."
+    ],
+    "ctaLine": "Contact your members of Congress today and urge them to support the Karly Rain Wood Act.",
+    "takeActionLabel": "Take action",
+    "footerLine": "#Pass5245 · Karly's Angels Army"
+  },
+
   "lookupStep": {
     "eyebrow": "Step 1 of 3",
     "title": "Find your lawmakers",

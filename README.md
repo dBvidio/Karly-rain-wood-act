@@ -425,21 +425,30 @@ no `cookies()`/`headers()`, fetches already opt out of caching with
 
 ## Layout — two-panel sidebar structure
 
-The page is now a two-panel ANCOR-style layout instead of a single stacked
-column:
+The page is a two-panel layout, simplified to match a reference screenshot
+of ANCOR's own VoterVoice-based advocacy page (bleed photo + "The Ask" +
+"The Details," nothing else competing for attention in the sidebar):
 
 - **`<aside>`** (`components/Sidebar.tsx`) — `rain-500` (`#ab0e7b`)
-  background, white text. Holds the `#Pass5245` wordmark, headline, Karly's
-  portrait photo, "The Ask," a "TAKE ACTION" button, "The Details" (bill
-  number/status/sponsors), and the 3 short reasons. On desktop (`lg:`
-  breakpoint and up) it's a fixed-width (`w-96`), sticky, independently
-  scrolling column pinned to the left. Below that breakpoint it's a normal
-  block that stacks above `<main>` in document order — no separate mobile
-  layout to maintain, it's the same component either way.
-- **`<main>`** — white background, holds the interactive flow
-  (`ActionFlow`) and every below-the-fold section (Karly's story,
-  Community, bill summary/status, endorsements, donate, press, FAQ,
-  footer).
+  background, white text, edge-to-edge photo at the top (no border/rounded
+  corners, matching the reference). Below that: a small `#Pass5245`
+  eyebrow, "The Ask:" (one short paragraph), "The Details:" (1-2 short
+  paragraphs on what the bill does), an italic closing call-to-action
+  line, a compact "Take action ↓" link, and a small footer line — all
+  pulled from the `sidebar` block in `content/site-content.json`. On
+  desktop (`lg:` and up) it's a fixed-width (`w-96`), sticky,
+  independently scrolling column pinned to the left; below that
+  breakpoint it's a normal block stacking above `<main>` — same component,
+  no separate mobile layout to maintain.
+- **`<main>`** — white background. Starts with `components/MainIntro.tsx`
+  (the page headline + the 3 short "why this matters" reasons — moved out
+  of the sidebar to keep it as uncluttered as the reference, but kept
+  somewhere since the brief explicitly wanted them near the top). Then the
+  interactive flow (`ActionFlow`) and every below-the-fold section (Karly's
+  story, Community, bill summary/status, endorsements, donate, press, FAQ,
+  footer) — none of that was in the ANCOR reference (their widget is
+  narrowly single-purpose), but nothing asked for it to be removed, so it
+  stays per the original brief.
 
 `app/page.tsx` wraps both in a `flex flex-col lg:flex-row` container, so
 the breakpoint is the only thing that changes stacked-vs-side-by-side;
@@ -479,12 +488,30 @@ obstacles, both real:
    mismatched photo. (The `pillow-heif` install and HEIC→JPEG conversion
    pipeline itself worked fine — that's not the problem.)
 
-**To actually finish this:** please resend all 4 as real file
-attachments — the portrait, the memorial poster, the yard sign, and the
-correct TV news screenshot. The code is fully wired against the 4 target
-paths (Next.js `<Image>` components, correct `sizes`, real alt text
-already written); the moment real files land there, everything works with
-zero further code changes.
+A follow-up message shared all 5 images again (same 5, "labelled" this
+time) — but I checked the upload directory before touching anything, and
+confirmed nothing new landed on disk. The labeling wasn't the problem
+last time (I'd already correctly identified all 5 images by content); the
+problem both times has been the *transport*: pasting/dragging an image
+into the message body only makes it visible to me, it doesn't create a
+file. Only the paperclip/attach-file action does that — it's the only
+reason the HEIC file reached disk at all.
+
+**To actually finish this, two options:**
+1. Use the chat's file-attach control specifically (not paste/drag into
+   the message text) for each of the 4 files, one at a time if that's more
+   reliable. Confirm the exact filename before sending so a repeat of the
+   HEIC mismatch doesn't happen again.
+2. **Probably more reliable at this point, given two rounds of attachment
+   trouble:** push the 4 files directly into the repo yourself, at exactly
+   `public/images/karly-portrait.jpg`, `karly-memorial-poster.jpg`,
+   `never-forget-yard-sign.jpg`, and `press-tv-coverage.jpg`, via GitHub's
+   web "Add file → Upload files" on this branch. That sidesteps the chat
+   entirely — I'll pick them up on the next pull.
+
+The code is fully wired against those 4 target paths (Next.js `<Image>`
+components, correct `sizes`, real alt text already written); the moment
+real files land there, everything works with zero further code changes.
 
 Verified (see chat for screenshots): with the files absent, Next's image
 optimizer correctly 400s each request rather than crashing the page or
