@@ -8,13 +8,13 @@ export default function Sidebar({ content }: { content: SiteContent }) {
   const { sidebar, images } = content;
 
   return (
-    <aside className="flex flex-col bg-rain-500 text-white lg:sticky lg:top-0 lg:h-screen lg:w-96 lg:shrink-0 lg:overflow-y-auto">
+    <aside className="flex flex-col bg-rain-500 text-white lg:sticky lg:top-0 lg:h-screen lg:w-2/5 lg:shrink-0 lg:overflow-y-auto">
       <div className="relative aspect-[4/3] w-full shrink-0 bg-rain-600 lg:aspect-square">
         <Image
           src={images.karlyPortrait.src}
           alt={images.karlyPortrait.alt}
           fill
-          sizes="(min-width: 1024px) 384px, 100vw"
+          sizes="(min-width: 1024px) 40vw, 100vw"
           className="object-cover"
           priority
         />
