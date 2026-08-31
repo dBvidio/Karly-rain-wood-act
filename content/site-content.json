@@ -15,22 +15,22 @@
   },
 
   "images": {
-    "_note": "Real photo files must be placed at these exact paths in /public/images/ — none exist yet (blocked: source files are on a local machine this build environment can't reach, not attached to the conversation). Alt text below is already final; nothing else needs to change once the files land.",
+    "_note": "STATUS: none of the 4 photos are in place yet. Only file attachments (not images pasted inline in chat) land on disk where this build environment can read/convert/save them — the one attachment sent so far (IMG_20260820_094827.HEIC, meant to be the TV news screenshot) turned out to contain an unrelated photo of 3 people at an event, not the TV graphic shown inline in chat, so it was deliberately NOT wired in rather than mislabeling a real photo of real people. Please resend all 4 as actual file attachments (drag-and-drop / paperclip, the same mechanism that got the HEIC here) — karly-portrait.jpg, karly-memorial-poster.jpg, never-forget-yard-sign.jpg, and the correct TV news screenshot — and they'll be wired in immediately with no other code changes.",
     "karlyPortrait": {
       "src": "/images/karly-portrait.jpg",
       "alt": "Portrait photo of Karly Rain Wood"
     },
     "memorialPoster": {
       "src": "/images/karly-memorial-poster.jpg",
-      "alt": "\"Forever in Our Hearts\" memorial poster for Karly Rain Wood"
+      "alt": "\"Forever in Our Hearts\" memorial poster for Karly Rain Wood, celebrating her life April 16, 2002 - November 13, 2022"
     },
     "yardSign": {
       "src": "/images/never-forget-yard-sign.jpg",
-      "alt": "\"We Will Never Forget\" yard sign supporting the Karly Rain Wood Act"
+      "alt": "\"We Will Never Forget\" yard sign supporting the Karly Rain Wood Act, with a link to follow Remember Karly Rain"
     },
     "pressScreenshot": {
       "src": "/images/press-tv-coverage.jpg",
-      "alt": "Local television news coverage of the Karly Rain Wood Act"
+      "alt": "First Alert 6 news graphic: Karly Rain Wood Act Introduced"
     }
   },
 
@@ -173,13 +173,13 @@
         "date": ""
       },
       {
-        "outlet": "Local TV News",
-        "headline": "Local news coverage of the Karly Rain Wood Act",
+        "outlet": "First Alert 6",
+        "headline": "Karly Rain Wood Act Introduced",
         "url": "",
         "date": "",
-        "imageSrc": "/images/press-tv-coverage.jpg",
-        "imageAlt": "Local television news coverage of the Karly Rain Wood Act",
-        "_note": "outlet/headline are intentionally generic — the real station name and on-screen headline haven't been read off the actual screenshot yet (this build environment doesn't have the file). Update both once you can read the exact text off the screenshot."
+        "imageSrc": "",
+        "imageAlt": "",
+        "_note": "PAUSED, not fabricated: the outlet/headline text was read off a TV-graphic image you showed inline in chat, but the file that actually attached under the matching filename (IMG_20260820_094827.HEIC) turned out to contain a different photo entirely (3 people at an event) -- so imageSrc is intentionally left blank rather than pointing a real-people photo at a caption describing a different image. Once you confirm which file is the actual TV screenshot and it comes through as a real attachment, this gets wired in immediately."
       }
     ],
     "mediaContactLabel": "Press inquiries",

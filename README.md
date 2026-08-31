@@ -374,20 +374,17 @@ page.
 
 ## Deploying a preview
 
-I don't currently have Vercel or Netlify account access from this
-environment, so I haven't deployed a live preview URL yet. To get you one
-fastest:
-
-- **Fastest path:** if you connect this GitHub repo to a Vercel or Netlify
-  account (either invite me as a collaborator with deploy access, or share
-  a deploy token / project you've already created), I can push the preview
-  directly and hand you the URL.
-- **Or, in the meantime, the fastest way for you to see it yourself:**
-  import `dBvidio/Karly-rain-wood-act` at vercel.com/new (or
-  app.netlify.com), point it at branch `claude/karly-rain-wood-advocacy-xvhykc`,
-  and add the `GEOCODIO_API_KEY` environment variable — it'll deploy in
-  under a minute and every future push to this branch will auto-update the
-  preview URL.
+**You've deployed one yourself:** https://karly-rain-wood-act.vercel.app/
+— thank you. One caveat: I still can't visit it from this environment
+myself to verify it (this session's network policy blocks essentially all
+outbound browsing, confirmed against multiple unrelated domains including
+this one — not something specific to karlyrain.com). So I can't confirm
+the deployed build actually reflects the latest push, or eyeball it the
+way I can the local build. If Vercel is set to auto-deploy on push to
+`claude/karly-rain-wood-advocacy-xvhykc`, it should already be current;
+worth a manual check on your end that it picked up the latest commit,
+and letting me know if anything looks different from the local
+screenshots in this conversation.
 
 ---
 
@@ -461,28 +458,33 @@ paths/alt text):
 | "We Will Never Forget" yard sign | Community/movement section | `/public/images/never-forget-yard-sign.jpg` |
 | Local TV news coverage | Press & media section | `/public/images/press-tv-coverage.jpg` |
 
-**Blocked — genuinely can't fix from here, not a code problem:** the
-source files live at an absolute path on your own local Mac
-(`/Users/denlisbertrand/Documents/Karly Rain Wood Act/`). This build
-environment is a separate cloud sandbox with no access to your local
-filesystem — confirmed (`/Users` doesn't exist on this machine at all).
-The code is fully wired and tested against these exact paths (Next.js
-`<Image>` components, correct `sizes`, real alt text already written) —
-the moment real JPGs land at those 4 paths, everything works with zero
-code changes. To get them here, either:
-1. Attach the 4 files directly in this conversation, or
-2. Commit/push them into the repo yourself (e.g. via GitHub's web upload)
-   at exactly those paths.
+**Still blocked — 0 of 4 photos are actually in place.** Two separate
+obstacles, both real:
 
-The 4th file (`IMG_20260820_094827.jpg`/`.HEIC`) is a TV news screenshot —
-if it's `.HEIC`, either convert it before sending (any online converter,
-or macOS Preview → File → Export → JPEG) or send the `.HEIC` as-is and
-I'll convert it here (this environment has network access to PyPI, so
-`pillow-heif` is installable). Also: I can't read what's on-screen in that
-screenshot, so `press.items[1].outlet` and `.headline` in
-`content/site-content.json` are currently generic placeholders ("Local TV
-News" / "Local news coverage of the Karly Rain Wood Act") — update those
-to the real station name and headline once you can read the screenshot.
+1. **Inline/pasted images aren't readable files.** When you shared 5
+   photos directly in the chat message, they're visible to me for
+   description, but this environment has no file for them — only an
+   actual file *attachment* (paperclip/drag-and-drop) lands on disk where
+   code here can read, convert, or save it. None of the 4 core photos have
+   come through that way yet.
+2. **The one attachment sent so far didn't match its filename.** You did
+   attach a file named `IMG_20260820_094827.HEIC` (meant to be the TV news
+   screenshot). Its actual contents, once decoded, turned out to be an
+   unrelated photo — three people at what looks like an event with a flag
+   backdrop, not the "KARLY RAIN WOOD ACT INTRODUCED" news graphic shown
+   inline in your message. I sent you that decoded image in chat to
+   confirm. Rather than caption a real photo of real people with a
+   headline that describes a different image, I deliberately left it
+   unwired — `press.items[1].imageSrc` is blank, not pointed at a
+   mismatched photo. (The `pillow-heif` install and HEIC→JPEG conversion
+   pipeline itself worked fine — that's not the problem.)
+
+**To actually finish this:** please resend all 4 as real file
+attachments — the portrait, the memorial poster, the yard sign, and the
+correct TV news screenshot. The code is fully wired against the 4 target
+paths (Next.js `<Image>` components, correct `sizes`, real alt text
+already written); the moment real files land there, everything works with
+zero further code changes.
 
 Verified (see chat for screenshots): with the files absent, Next's image
 optimizer correctly 400s each request rather than crashing the page or
