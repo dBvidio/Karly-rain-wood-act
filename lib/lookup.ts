@@ -36,6 +36,7 @@ type GeocodioLegislator = {
     url?: string;
     contact_form?: string;
     phone?: string;
+    email?: string;
   };
 };
 
@@ -63,6 +64,7 @@ function toLawmaker(
     state,
     district: l.type === "representative" ? district : undefined,
     phone: l.contact?.phone,
+    email: l.contact?.email,
     contactFormUrl: l.contact?.contact_form,
     officialUrl: l.contact?.url,
   };
@@ -119,6 +121,18 @@ export async function lookupLawmakers(
 
   if (senators.length === 0 && !rep) {
     return { ok: false, code: "NO_MATCH" };
+  }
+
+  // Diagnostic only (visible in server/Vercel function logs) -- helps
+  // confirm whether an incomplete result (e.g. only 1 of 3 officials) is
+  // Geocodio returning partial data for this address, vs. a bug in this
+  // file or the UI. Never shown to the visitor.
+  if (senators.length < 2 || !rep) {
+    console.warn(
+      `[lookup] Incomplete legislator data for "${query}": ${senators.length} senator(s), representative ${
+        rep ? "found" : "MISSING"
+      }. Raw legislator types returned: ${legislators.map((l) => l.type).join(", ") || "(none)"}`
+    );
   }
 
   return {

@@ -23,6 +23,7 @@ export type FunnelStep =
   | "send_click"
   | "message_copied"
   | "contact_form_opened"
+  | "mailto_opened"
   | "share_text"
   | "share_facebook"
   | "share_copy_link";

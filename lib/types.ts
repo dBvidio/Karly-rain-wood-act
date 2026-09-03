@@ -5,6 +5,7 @@ export type Lawmaker = {
   state: string;
   district?: string;
   phone?: string;
+  email?: string;
   contactFormUrl?: string;
   officialUrl?: string;
   photoUrl?: string;

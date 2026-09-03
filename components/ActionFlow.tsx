@@ -41,6 +41,36 @@ export default function ActionFlow({ content }: { content: SiteContent }) {
     return parts.join("\n");
   }, [letterBody, personalNote]);
 
+  /**
+   * Every lawmaker gets an action, never silently dropped just because
+   * Geocodio didn't return a contact-form URL for them. Preference order:
+   * their actual contact form > their official site > a Congress.gov
+   * search as a last resort that always resolves to something real.
+   *
+   * NOTE (flagged for review): whether each office's contactFormUrl
+   * actually IS their contact form (vs. a homepage Geocodio mislabeled)
+   * has NOT been independently verified against the live sites -- this
+   * build environment has no network access to house.gov/senate.gov to
+   * check. Labels below say "contact form" only when Geocodio itself
+   * labeled it that way; "official website" when falling back, so the
+   * visitor isn't told something is a contact form when it's unverified.
+   */
+  function bestLink(l: Lawmaker): { url: string; label: string } {
+    if (l.contactFormUrl) return { url: l.contactFormUrl, label: "Open contact form" };
+    if (l.officialUrl) return { url: l.officialUrl, label: "Open official website" };
+    return {
+      url: `https://www.congress.gov/search?q=${encodeURIComponent(l.name)}`,
+      label: "Look up on Congress.gov",
+    };
+  }
+
+  function mailtoHref(l: Lawmaker): string | null {
+    if (!l.email) return null;
+    const subject = encodeURIComponent(messageStep.subjectLine);
+    const body = encodeURIComponent(fullMessage);
+    return `mailto:${l.email}?subject=${subject}&body=${body}`;
+  }
+
   async function handleLookup(e: React.FormEvent) {
     e.preventDefault();
     if (!query.trim()) return;
@@ -104,17 +134,21 @@ export default function ActionFlow({ content }: { content: SiteContent }) {
     setSent(true);
     fetch("/api/counter", { method: "POST" }).catch(() => {});
 
-    const first = lawmakers.find((l) => l.contactFormUrl);
-    if (first?.contactFormUrl) {
-      window.open(first.contactFormUrl, "_blank", "noopener,noreferrer");
+    // Only ever auto-open ONE tab from this click -- browsers (Safari
+    // especially) block multiple simultaneous window.open() calls from a
+    // single tap. The rest are individual one-tap buttons below.
+    const first = lawmakers[0];
+    if (first) {
+      const { url } = bestLink(first);
+      window.open(url, "_blank", "noopener,noreferrer");
       setOpenedForms((prev) => new Set(prev).add(first.name));
       track("contact_form_opened", { office: first.name });
     }
   }
 
   function openForm(lawmaker: Lawmaker) {
-    if (!lawmaker.contactFormUrl) return;
-    window.open(lawmaker.contactFormUrl, "_blank", "noopener,noreferrer");
+    const { url } = bestLink(lawmaker);
+    window.open(url, "_blank", "noopener,noreferrer");
     setOpenedForms((prev) => new Set(prev).add(lawmaker.name));
     track("contact_form_opened", { office: lawmaker.name });
   }
@@ -266,26 +300,50 @@ export default function ActionFlow({ content }: { content: SiteContent }) {
             </div>
 
             {sent && (
-              <div className="mt-5 space-y-2">
-                {lawmakers
-                  .filter((l) => l.contactFormUrl)
-                  .map((l) => (
-                    <button
-                      key={l.name}
-                      type="button"
-                      onClick={() => openForm(l)}
-                      className="focus-ring flex w-full items-center justify-between rounded-xl border border-rain-200 bg-white px-4 py-3 text-sm font-semibold text-ink-900 shadow-sm transition hover:bg-blush-50"
-                    >
-                      <span>
-                        {messageStep.openFormLabel}: {l.name}
-                      </span>
-                      {openedForms.has(l.name) && (
-                        <span aria-hidden className="text-rain-500">
-                          &#10003;
-                        </span>
-                      )}
-                    </button>
-                  ))}
+              <div className="mt-5 space-y-4">
+                <p className="text-xs font-semibold text-rain-600">
+                  Message copied to your clipboard &mdash; paste it into each box below.
+                </p>
+
+                {lawmakers.map((l) => {
+                  const { url, label } = bestLink(l);
+                  const mailto = mailtoHref(l);
+                  return (
+                    <div key={l.name} className="rounded-xl border border-rain-200 bg-white p-3 shadow-sm">
+                      <p className="text-sm font-semibold text-ink-900">{l.name}</p>
+                      <p className="text-xs text-ink-500">
+                        {l.chamber === "senate" ? "U.S. Senator" : "U.S. Representative"}
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          onClick={() => openForm(l)}
+                          className="focus-ring flex items-center gap-1.5 rounded-full border border-rain-200 bg-blush-50 px-3 py-1.5 text-xs font-semibold text-ink-900 transition hover:bg-blush-100"
+                        >
+                          {label}
+                          {openedForms.has(l.name) && (
+                            <span aria-hidden className="text-rain-500">
+                              &#10003;
+                            </span>
+                          )}
+                        </button>
+                        {mailto && (
+                          <a
+                            href={mailto}
+                            onClick={() => track("mailto_opened", { office: l.name })}
+                            className="focus-ring flex items-center gap-1.5 rounded-full border border-rain-200 bg-blush-50 px-3 py-1.5 text-xs font-semibold text-ink-900 transition hover:bg-blush-100"
+                          >
+                            Email directly
+                          </a>
+                        )}
+                      </div>
+                      <p className="mt-1 text-[11px] text-ink-500">
+                        {url} &mdash; opens in a new tab, nothing is sent automatically. You&rsquo;ll
+                        paste your message and click their site&rsquo;s own send button.
+                      </p>
+                    </div>
+                  );
+                })}
 
                 <button
                   type="button"

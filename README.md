@@ -116,29 +116,82 @@ immediately with no other changes needed.
 ## How "send to my lawmakers" works
 
 Congressional offices, almost without exception, do **not** accept direct
-email — they require their own secure webform (often with CAPTCHA and
-required fields like topic/category), specifically to block mass /
-automated submissions. That means a single "true one-tap send to all three
-offices" isn't something any provider — Geocodio, Cicero, or even a paid
-platform like Action Network — can fully deliver; even paid platforms
-solve this by owning long-term relationships with individual congressional
-IT offices, not through fully automation.
-
-So the site implements the graceful fallback the brief explicitly allows:
+email through a generic address — they require their own secure webform
+(often with CAPTCHA and required fields like topic/category), specifically
+to block mass/automated submissions. That means a single "true one-tap
+send to all three offices" isn't something any provider — Geocodio,
+Cicero, or even a paid platform like Action Network — can fully deliver;
+even paid platforms solve this by owning long-term relationships with
+individual congressional IT offices, not through automation. **Hard
+constraint honored throughout:** nothing here ever fires a network request
+that submits the visitor's message anywhere. Every path — contact-form tab
+or `mailto:` — leaves the visitor looking at a filled-in draft they still
+click "send" on themselves, on the office's own site or in their own email
+client.
 
 1. Visitor writes/personalizes their letter.
-2. Tapping **SEND TO MY LAWMAKERS** does two things in one tap:
-   - Copies the finished message to the clipboard automatically (no manual
-     text selection).
-   - Opens the first office's official contact-form page in a new tab.
-3. Two more one-tap buttons appear for the other two offices — the message
-   is already on the clipboard, so it's copy-once, paste-three-times.
-4. A standalone **COPY MESSAGE** button is always available too.
+2. Tapping **SEND TO MY LAWMAKERS** does two things in one tap: copies the
+   finished message to the clipboard, and opens *one* office's page in a
+   new tab (never more than one automatically — Safari and other mobile
+   browsers block multiple simultaneous `window.open()` calls from a
+   single tap, which is why the pattern below stays one-auto-open +
+   individual per-office buttons).
+3. **Every official gets a visible action, never silently dropped.**
+   (Previously, an official with no `contactFormUrl` in the lookup data
+   just didn't get a button at all — that's what "only one lawmaker's
+   contact info surfaces" turned out to be, not a lookup bug: all
+   officials were always listed above, but only ones with that one field
+   populated got a way to act on them. `bestLink()` in
+   `components/ActionFlow.tsx` now always resolves to *something* real:
+   their contact form, or their official site, or a Congress.gov search
+   as a last resort — and the button's label changes accordingly, so a
+   fallback link is never presented as if it were confirmed to be their
+   contact form.)
+4. If Geocodio returns a public email for an office, an **"Email
+   directly"** button also appears — a `mailto:` link with the subject and
+   full message pre-filled in the body. This is the one channel that's
+   *guaranteed* to prefill correctly everywhere, since `mailto:` is a
+   browser/OS-level standard, not dependent on any particular office's
+   website.
+5. A standalone **COPY MESSAGE** button is always available too, and each
+   official's card repeats the "message copied — paste it in, nothing is
+   sent automatically" note so it's never ambiguous what tapping a button
+   does.
 
-This is "as close to one tap as possible" within what congressional offices
-actually allow, without pretending to a "fully automated" send that would
-either be dishonest about what happened or would get flagged as spam by
-congressional office software.
+**What I could not verify, and why (flagged, not glossed over):** you
+asked for real testing of 3-4 actual congressional offices' contact-form
+URLs — whether each one truly is the contact page (not a homepage),
+whether it accepts pre-fill via query parameters, and whether a direct
+email exists. **This build environment has no network access to
+`api.geocod.io`, `house.gov`, or `senate.gov`** — confirmed three separate
+ways (direct `curl`, the network proxy's own status log, and `WebFetch`),
+all returning the same organization-policy 403, not a transient failure.
+I'm not fabricating a results table for pages I never loaded. What I *did*
+verify, without needing that access: the UI now correctly handles every
+data-completeness shape a real API response could plausibly send (full
+data, missing contact form, missing everything but email) — tested across
+3 simulated addresses, confirmed via Playwright that every official gets a
+correctly-linked action, `mailto:` hrefs contain the real encoded
+subject+body, the clipboard actually contains the message, zero unexpected
+outbound `POST` requests fire (checked via the network tab, not assumed —
+the only `POST`s are this app's own `/api/lookup`, which submits just the
+ZIP/address, and `/api/counter`; neither ever carries the visitor's
+message), and nothing advances without a manual click.
+
+**Still open, needs one of:**
+1. Grant this environment network access to `api.geocod.io` /
+   `house.gov` / `senate.gov` so I can do the real per-office testing.
+2. Visit a few offices yourself and tell me: is the `contactFormUrl` each
+   one currently opens actually their message form (not a homepage), and
+   does appending something like `?subject=X&message=Y` to it visibly
+   pre-fill anything? Real per-office results, even for just 2-3 offices,
+   would tell me whether query-param pre-fill is worth building for
+   contact forms generally or is office-specific enough to skip.
+3. Paste a raw JSON response from a real `/api/lookup` call (or the
+   Geocodio API directly) so I can see exactly what data shape real
+   addresses actually return, which would confirm or rule out the
+   `bestLink()` fallback fix above as the complete explanation for "only
+   one lawmaker's contact info surfaces."
 
 ---
 
